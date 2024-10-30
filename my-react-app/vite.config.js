@@ -4,7 +4,7 @@ import path from 'path'
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: '/2024-2-VK-EDU-Frontend-K-Terebaev/',
+  base: '/messenger_by_yava/',
   server: {
     port: 3000,
     watch: {
