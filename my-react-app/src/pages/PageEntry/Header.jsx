@@ -1,45 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
+import AppsIcon from '@mui/icons-material/Apps';
+import SearchIcon from '@mui/icons-material/Search';
+import AssistantIcon from '@mui/icons-material/Assistant';
+import Logo from "../../ExportModule/Logo.jsx";
+import DarkmodeButton from "../../ExportModule/DarkmodeButton.jsx";
 
 const Header = ({ isDarkMode, toggleDarkMode }) =>  {
+    const [searchInput, setSearchInput] = useState('');
+    const [isFocused, setIsFocused] = useState(false);
+
     return (
         <header className="header">
-            <a href="/" className="header-link">
-                <img
-                    src={isDarkMode ? "/svg/lightlogo.svg" : "/svg/darklogo.svg"}
-                    alt="Messenger by yava"
-                    className="logomode"
+            <Logo isDarkMode={isDarkMode} />
+            <DarkmodeButton isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
+            <div className={`search-container ${isFocused ? 'focused' : ''} ${isDarkMode ? 'dark-mode' : ''}`}>
+                <AssistantIcon className="assistant-icon"/>
+                <input
+                    type="text"
+                    className="search-input"
+                    placeholder="Поиск..."
+                    value={searchInput}
+                    onFocus={() => setIsFocused(true)}
+                    onBlur={() => setIsFocused(false)}
+                    onChange={(e) => setSearchInput(e.target.value)}
                 />
-                <div className="logo-text">
-                    <span>messenger</span>
-                    <span>by yava</span>
-                </div>
-            </a>
-            <input
-                id="hide-checkbox"
-                type="checkbox"
-                checked={isDarkMode}
-                onChange={toggleDarkMode}
-            />
-            <label className="toggle" htmlFor="hide-checkbox">
-                    <span className="toggle-button">
-                        <span className="crater crater-1"></span>
-                        <span className="crater crater-2"></span>
-                        <span className="crater crater-3"></span>
-                        <span className="crater crater-4"></span>
-                        <span className="crater crater-5"></span>
-                        <span className="crater crater-6"></span>
-                        <span className="crater crater-7"></span>
-                    </span>
-                <span className="star star-1"></span>
-                <span className="star star-2"></span>
-                <span className="star star-3"></span>
-                <span className="star star-4"></span>
-                <span className="star star-5"></span>
-                <span className="star star-6"></span>
-                <span className="star star-7"></span>
-                <span className="star star-8"></span>
-            </label>
-            <span className="header-title">Добро пожаловать!</span>
+                <SearchIcon className="search-icon"/>
+                <AppsIcon className="app-icon"/>
+            </div>
         </header>
     )
 }

@@ -27,6 +27,7 @@ header, footer{
 header{
   top: 0;
 }
+
 footer{
   bottom: 0;
   font-size: 10px;
@@ -64,206 +65,295 @@ footer{
   margin-right: auto;
 }
 
-.header-title {
-  color: style.$black;
-  font-size: 40px;
+.search-container {
   position: absolute;
   padding: 0;
   margin: 0 auto;
   left: 50%;
   transform: translateX(-50%);
+  width: 300px; // Начальная ширина
+  transition: width 0.3s ease; // Анимация изменения ширины
 }
 
-.toggle{
-  padding: 0;
-  margin: 0;
-  transform: scale(0.4);
-  transform-origin: right;
-  display: flex;
-  align-items: center;
+.search-container.focused {
+  width: 450px; // Ширина при фокусе
 }
 
-main{
-  margin: 20px auto; // Центрируем main по горизонтали
-  position: relative;
-  width: 350px;
-  height: 500px;
-  overflow: hidden;
-  background-image: linear-gradient(style.$pink, style.$dark-pink);
-  border-radius: 10px;
-  box-shadow: 5px 20px 50px #000;
-}
-
-.registration-label, .registration-label{
-  margin: 30px 10px 20px 10px;
-  font-size: 30px;
-}
-
-#chk{
-  display: none;
-}
-
-.signup{
-  position: relative;
-  width:100%;
-  height: 100%;
-}
-
-label{
-  color: style.$black;
-  font-size: 36px;
-  justify-content: center;
-  display: flex;
-  margin: 60px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: .5s ease-in-out;
-}
-
-.data {
-  width: 80%;
-  height: 40px;
-  background: style.$gray;
-  justify-content: center;
-  display: flex;
-  margin: 20px auto;
-  outline: none;
-  border-radius: 30px;
-  padding: 12px 28px;
-  color: style.$black;
+.search-input {
   transition: .8s ease-in-out;
-}
-
-input::placeholder{
-  color: style.$black;
-  opacity: 1;
-}
-
-input:hover{
-  box-shadow: 0 2px 10px rgb(238, 175, 194);
-}
-
-button {
-  width: 60%;
-  height: 40px;
-  margin: 10px auto;
   justify-content: center;
-  display: block;
-  color: style.$black;
-  background: style.$pink;
-  font-size: 1em;
-  font-weight: bold;
-  outline: none;
+  text-align: center;
+  background: rgb(94, 92, 92);
+  width: 100%;
+  padding: 10px 40px 10px 40px; // Отступы для иконок
   border-radius: 20px;
-  transition: .2s ease-in;
-  cursor: pointer;
 }
 
-button:hover{
-  background: style.$dark-pink;
-  box-shadow: 0 2px 10px rgb(238, 175, 194);
-  transition: all 0.3s ease-in-out;
-  border: 1px solid #e174a3;
+.search-input:focus,{
+  box-shadow: 0 2px 10px style.$light-pink; // Цвет рамки при фокусе
+  outline: none; // Убираем стандартный outline
 }
-
-.login{
-  height: 460px;
-  background: rgba(94, 92, 92, 0.65);
-  border-radius: 60% / 10%;
-  transform: translateY(-140px);
-  transition: .8s ease-in-out;
-}
-
-.login label{
-  color: style.$black;
-  transform: scale(.6);
-}
-
-#chk:checked ~ .login{
-  transform: translateY(-500px);
-}
-
-#chk:checked ~ .login label{
-  transform: scale(1);
-}
-
-#chk:checked ~ .signup label{
-  transform: scale(.6);
-}
-
-footer {
-}
-
-.footer-title{
-  color: style.$black;
-  font-size: 20px;
-  position: absolute;
-  margin: 0;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-main.dark-mode {
-  background-image: linear-gradient(style.$light-pink, style.$pink);
-  .login, input{
-    background-color: style.$white;
-  }
-
-  input:hover, button:hover{
+.search-container.dark-mode {
+  .search-input:focus, .search-input:hover{
     box-shadow: 0 2px 10px style.$dark-pink;
   }
-
-}
-
-@media (max-width: 400px), (max-height: 700px) {
-  main{
-    //position: absolute;
-    transform: scale(0.7);
+  .search-input{
+    background-color: style.$white;
   }
+}
+  .search-icon, .assistant-icon, .app-icon {
+    top: 50%; // Центрирование по вертикали
+    transform: translateY(-50%);
+    margin: 0;
+    justify-content: center;
+    text-align: center;
+    right: 0;
+    position: absolute;
+    cursor: pointer;
+    color: style.$black; // Цвет иконок
+  }
+
+  .assistant-icon {
+    left: 10px; // Положение иконки слева
+  }
+
+  .search-icon {
+    right: 10px; // Положение иконок справа
+  }
+
+  .app-icon{
+    right: 40px;
+  }
+
 
   .toggle{
-    position: absolute;
-    right: 0;
-  }
-
-  .logomode{
-    position: absolute;
-    left: 0;
-  }
-
-  .logo-text{
-    position: absolute;
+    top: 50%;
     padding: 0;
-    margin: 0 auto;
+    margin: 0;
+    transform: scale(0.4);
+    transform-origin: right;
+    align-items: center;
+    justify-content: center;
+  }
+
+  main{
+    margin: 20px auto; // Центрируем main по горизонтали
+    position: relative;
+    width: 350px;
+    height: 500px;
+    overflow: hidden;
+    background-image: linear-gradient(style.$pink, style.$dark-pink);
+    border-radius: 10px;
+    box-shadow: 5px 20px 50px #000;
+  }
+
+  .registration-label, .registration-label{
+    margin: 30px 10px 20px 10px;
+    font-size: 30px;
+  }
+
+  #chk{
+    display: none;
+  }
+
+  .signup{
+    position: relative;
+    width:100%;
+    height: 100%;
+  }
+
+  label{
+    color: style.$black;
+    font-size: 36px;
+    justify-content: center;
+    display: flex;
+    margin: 60px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: .5s ease-in-out;
+  }
+
+  .data {
+    width: 80%;
+    height: 40px;
+    background: style.$gray;
+    justify-content: center;
+    display: flex;
+    margin: 20px auto;
+    outline: none;
+    border-radius: 30px;
+    padding: 12px 28px;
+    color: style.$black;
+    transition: .8s ease-in-out;
+  }
+
+  input::placeholder{
+    color: style.$black;
+    opacity: 1;
+  }
+
+  input:hover, .search-input:hover {
+    box-shadow: 0 2px 10px rgb(238, 175, 194);
+  }
+
+  button {
+    width: 60%;
+    height: 40px;
+    margin: 10px auto;
+    justify-content: center;
+    display: block;
+    color: style.$black;
+    background: style.$pink;
+    font-size: 1em;
+    font-weight: bold;
+    outline: none;
+    border-radius: 20px;
+    transition: .2s ease-in;
+    cursor: pointer;
+  }
+
+  button:hover{
+    background: style.$dark-pink;
+    box-shadow: 0 2px 10px rgb(238, 175, 194);
+    transition: all 0.3s ease-in-out;
+    border: 1px solid #e174a3;
+  }
+
+  .login, {
+    height: 460px;
+    background: rgba(94, 92, 92, 0.65);
+    border-radius: 60% / 10%;
+    transform: translateY(-140px);
+    transition: .8s ease-in-out;
+  }
+
+  .login label{
+    color: style.$black;
+    transform: scale(.6);
+  }
+
+  #chk:checked ~ .login{
+    transform: translateY(-500px);
+  }
+
+  #chk:checked ~ .login label{
+    transform: scale(1);
+  }
+
+  #chk:checked ~ .signup label{
+    transform: scale(.6);
+  }
+
+  .footer-title{
+    color: style.$black;
+    font-size: 20px;
+    position: absolute;
+    margin: 0;
     left: 50%;
     transform: translateX(-50%);
   }
 
-  .footer-title{
-    font-size: 15px;
-    margin: 40px 0 0 0;
+  main.dark-mode {
+    background-image: linear-gradient(style.$light-pink, style.$pink);
+    .login, input{
+      background-color: style.$white;
+    }
+
+    input:hover, button:hover{
+      box-shadow: 0 2px 10px style.$dark-pink;
+    }
+    .message, .error {
+      background-color: style.$white;
+    }
   }
 
-  .header-title{
-    display: none;
-  }
-}
-
-@media (max-width: 300px){
+@media (max-width: 550px) {
   .logo-text{
     display: none;
   }
-
-  header{
-    transform: scale(0.7);
+  .search-container{
+    width: 200px;
   }
-
-  main{
-    transform: scale(0.6);
+  .search-container.focused {
+    width: 300px;
   }
+  @media (max-width: 410px), (max-height: 700px) {
+    main{
+      transform: scale(0.7);
+    }
 
-  .footer-title{
-    font-size: 10px;
-    margin: 40px 0 0 0;
+
+    .search-container{
+      transition: width 0.3s ease;
+      z-index: 1;
+      width: 140px;
+    }
+
+    .search-container .app-icon {
+      display: none;
+    }
+    .search-container.focused {
+      width: 250px;
+    }
+
+    .footer-title{
+      font-size: 15px;
+      margin: 40px 0 0 0;
+    }
+
+    .header-title{
+      display: none;
+    }
+    @media (max-width: 300px) {
+      .logo-text {
+        display: none;
+      }
+
+      .logomode, .search-container {
+        transform: scale(0.7);
+      }
+      .search-container {
+        transform: translate(-50%, -50%) scale(0.7);
+        position: absolute;
+        top: 50%;
+        left: 50%;
+      }
+      .toggle {
+        transform: scale(0.25);
+      }
+      main {
+        transform: scale(0.6);
+      }
+
+      .footer-title {
+        font-size: 10px;
+        margin: 40px 0 0 0;
+      }
+    }
+    @media (max-height: 400px){
+      main{
+        transform: scale(0.4);
+      }
+    }
   }
+}
+
+// styles.scss
+.message, .error {
+  background-color: style.$gray;
+  color: style.$black; // Цвет текста
+  padding: 10px; // Отступы
+  border-radius: 15px; // Скругление углов
+  text-align: center; // Центрирование текста
+  position: absolute; // Абсолютное позиционирование
+  top: 50%; // Центрирование по вертикали
+  left: 50%; // Центрирование по горизонтали
+  transform: translate(-50%, -50%); // Центрирование
+  z-index: 10; // Убедитесь, что сообщение выше других элементов
+  opacity: 0; // Начальное значение прозрачности
+  transition: opacity 0.5s ease-in-out; // Плавный переход
+}
+
+.message.show, .error.show {
+  opacity: 1; // Полная непрозрачность при показе
 }

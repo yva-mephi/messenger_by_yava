@@ -206,6 +206,12 @@ textarea {
   padding: 0.2em 0;
 }
 
+p {
+  font-family: 'Roboto', sans-serif; // Убедитесь, что шрифт совпадает с другими элементами
+  font-size: 16px; // Установите размер шрифта
+  line-height: 1.5; // Установите высоту строки
+}
+
 /* FONT */
 
 @font-face {
