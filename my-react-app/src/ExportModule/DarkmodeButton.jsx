@@ -1,8 +1,8 @@
 import React from 'react';
 
-const DarkmodeButton = ({ isDarkMode, toggleDarkMode }) =>  {
+const DarkmodeButton = ({ isDarkMode, toggleDarkMode, className })=>  {
     return (
-        <div className="darkmode-toggle">
+        <div className={`darkmode-toggle ${className}`}>
             <input
                 id="hide-checkbox"
                 type="checkbox"

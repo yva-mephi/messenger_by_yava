@@ -240,7 +240,7 @@ p {
 
 /* HTML */
 
-html{
+html, #root, .App {
   height: 100%;
   width: 100%;
   box-sizing: border-box;
@@ -264,13 +264,15 @@ body{
 
 $super-dark-pik:#1f1013;
 $dark-pink: #85014c;
-$pink: #ef369d;
+$dark-pink2: #8a275b;
+$pink: rgb(239, 54, 157);
 $light-pink: #ffb6d7;
 $gray: rgb(94, 92, 92);
 $light-gray: #808080;
 $black: rgb(0, 0, 0);
 $white: rgba(255, 255, 255, 0.7);
 $transparent: rgba(0, 0, 0, 0);
+$white-pink: #f6b3d7;
 
 //Розовый (#FF6F91): яркий розовый в сторону заката
 //Персиковый (#FF9AA2): более мягкий и теплый

@@ -5,7 +5,7 @@ const Footer = () => {
         <footer className="footer">
                 <span className="footer-title">
                     Учебный проект VK Frontend<br/>
-                    2024 Все права защищены.
+                    2024 Все права защищены.&copy;
                 </span>
         </footer>
     )

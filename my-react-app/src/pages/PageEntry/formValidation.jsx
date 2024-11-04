@@ -1,4 +1,6 @@
 import { userData } from '../../ExportModule/classes/user/users.js'; // Импортируем userData
+import pageManager from '../../ExportModule/classes/PageManager.js';
+import {saveToLocalStorage} from '../../ExportModule/utils/storage.js';
 
 export const validateRegistration = ({ nickname, password, firstName, lastName, patronymic }) => {
     if (!nickname || !password || !firstName || !lastName || !patronymic) {
@@ -43,7 +45,9 @@ export const handleFormSubmit = (action, data, setMessage) => {
         const user = userData.getUserByNickname(data.nickname);
         if (user && user.password === data.password) {
             setMessage("Авторизация успешна!");
-            // Здесь можно добавить логику для перехода на другую страницу или сохранения состояния пользователя
+            // handleNavigate = 'messages';
+            saveToLocalStorage(Number(user.id), 'currentUser')
+            pageManager.navigateTo('messages'); // переключаем страницу
         } else {
             setMessage("Неверный логин или пароль.");
         }

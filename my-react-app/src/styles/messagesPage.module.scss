@@ -1,0 +1,258 @@
+@use "style";
+
+.messagesMain{
+  margin-top: 80px;
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  background: style.$gray;
+  transition: .8s ease-in-out;
+  border-radius: 0;
+}
+
+.messagesPage {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background: none;
+
+  &.darkMode {
+    .messagesPage_header, .menu, .messagesPage{
+      background-image: linear-gradient(style.$light-pink, style.$pink);
+      transition: .8s ease-in-out;
+    }
+    .messagesMain{
+      background: style.$white-pink;
+      transition: .8s ease-in-out;
+    }
+    .searchInput{
+      background: style.$white;
+      transition: .8s ease-in-out;
+    }
+    .searchInput::placeholder{
+      color: style.$black;
+      transition: .8s ease-in-out;
+    }
+    .backbutton, .menuButton, .findButton, .fullName, .username, .footer, .menuList li {
+      transition: .8s ease-in-out;
+      color: style.$black;
+    }
+  }
+}
+
+.messagesPage_header{
+  display: flex;
+  position: relative;
+  top: 0;
+  margin: 0;
+  padding: 0;
+  height: 80px;
+  width: 100%;
+  background-image: linear-gradient(style.$dark-pink, style.$super-dark-pik);
+  align-items: center;
+  justify-content: center;
+  transition: .8s ease-in-out;
+}
+
+.searchField{
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%) translateX(+10px);
+  left: 100px;
+  height: 50px;
+  width: 90%;
+  background: none;
+  border: none;
+
+}
+.searchInput{
+  flex: 1;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background: style.$gray;
+  color: style.$white;
+  border-radius: 25px;
+  transition: .8s ease-in-out;
+  border: none;
+}
+
+.searchInput::placeholder{
+  font-weight: bold;
+  color: style.$white;
+
+}
+
+.backbutton, .menuButton{
+
+  color: style.$white;
+  top: 50%;
+  transform: translateY(-50%) translateX(+55px);
+  width: 50px;
+  margin: 0;
+  padding: 0; // Добавьте немного отступа для кликабельной области
+  background: none;
+  border: none;
+  position: absolute;
+  left: 0;
+  font-size: 100px;
+  // Выравнивание содержимого по центру
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  cursor: pointer; // Убедитесь, что курсор меняется на указатель при наведении
+  transition: background 0.3s; // Плавный переход для фона при наведении (опционально)
+
+  &:hover {
+    border:none;
+    background: none;
+    //background: rgba(0, 0, 0, 0.1); // Пример эффекта при наведении (опционально)
+  }
+}
+
+.menuButton {
+  transform: translateY(-50%) translateX(+5px);
+}
+
+
+.findButton{
+  flex: auto;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  position: absolute; // Оставляем абсолютное позиционирование
+  top: 50%;
+  left: 95%; // Отступ от правого края
+  transform: translateY(-50%); // Центрирование по вертикали
+  background: none;
+  border: none;
+  color: style.$white; // Цвет текста
+  cursor: pointer; // Указатель при наведении
+  padding: 0;
+  margin: 0;
+  &:hover{
+    border:none;
+    background: none;
+  }
+  transition: .8s ease-in-out;
+}
+
+.menu {
+  transition: transform 0.5s, opacity 0.5s;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 300px; // Ширина меню
+  height: 100vh; // Высота меню
+  background-image: linear-gradient(style.$dark-pink, style.$super-dark-pik);
+  padding: 20px; // Отступы
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5); // Тень для меню
+  transform: translateX(-100%); // Скрытое положение (вне экрана)
+  opacity: 0; // Начальное состояние - невидимое
+  z-index: 1000; // Убедитесь,
+}
+
+.menuOpen {
+  transform: translateX(0); // Положение при открытом меню
+  opacity: 1; // Полная видимость
+}
+.menuClosed {
+  transform: translateX(-100%); // Положение при закрытом меню
+  opacity: 0; // Невидимое состояние
+}
+.userInfo {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px; // Отступ между аватаром и списком
+}
+
+.avatar {
+  top: 10px;
+  transform: translateX(50%);
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  right: 50%;
+  width: 70px; // Ширина аватарки
+  height: 70px; // Высота аватарки
+  border-radius: 50%; // Круглая форма
+  //margin-right: 10px; // Отступ между аватаром и текстом
+}
+
+.userDetails {
+  display: flex;
+  flex-direction: column; // Вертикальное выравнивание
+}
+
+.fullName {
+  transition: .8s ease-in-out;
+  text-align: center;
+  position: absolute;
+  top: 90px;
+  right: 50%;
+  transform: translateX(50%);
+  font-size: 18px; // Размер шрифта для ФИО
+  color: white;
+}
+
+.username {
+  transition: .8s ease-in-out;
+  position: absolute;
+  right: 50%;
+  transform: translateX(50%);
+  top: 145px;
+  font-size: 14px; // Размер шрифта для логина
+  color: rgba(255, 255,  255, 0.7); // Цвет логина с прозрачностью
+}
+
+.menuList {
+  top: 300px;
+  text-align: center;
+  position: absolute;
+  right: 50%;
+  transform: translateX(50%);
+  list-style: none; // Убираем маркеры списка
+  padding: 0; // Убираем отступы
+  margin: 0; // Убираем маргин
+}
+
+.menuList li {
+  transition: background 0.2s, .8s ease-in-out;
+  padding: 15px 0; // Отступы для элементов списка
+  color: white; // Цвет текста
+  cursor: pointer; // Указатель при наведении
+}
+
+.menuList li:not(:last-child):hover {
+  background: rgba(255, 255, 255, 0.1); // Эффект при наведении
+}
+
+.darkmodetoggle{
+  padding: 15px;
+  position : fixed;
+}
+
+.footer {
+  transition: .8s ease-in-out;
+  text-align: center;
+  justify-content: center;
+  display: flex;
+  position: absolute;
+  bottom: 0; // Прижимает футер к низу меню
+  color: white; // Цвет текста
+  font-size: 12px; // Размер шрифта
+}
+
+.menuLogo{
+  color: white;
+  position: absolute;
+  top: 0;
+  left: 60px;
+  transform: translateX(-50%);
+}

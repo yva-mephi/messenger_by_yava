@@ -4,7 +4,7 @@ const Logo = ({ isDarkMode }) => {
     return (
         <a href="/" className="header-link">
             <img
-                src={isDarkMode ? "public/svg/lightlogo.svg" : "public/svg/darklogo.svg"}
+                src={isDarkMode ? "./svg/lightlogo.svg" : "./svg/darklogo.svg"}
                 alt="Messenger by yava"
                 className="logomode"
             />

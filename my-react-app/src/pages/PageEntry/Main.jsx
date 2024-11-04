@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { handleFormSubmit } from './formValidation';
+import { handleFormSubmit } from './formValidation.jsx';
 
-const Main = ({ isDarkMode }) => {
+const Main = ({ isDarkMode}) => {
     const [message, setMessage] = useState('');
     const [showMessage, setShowMessage] = useState(false);
 
