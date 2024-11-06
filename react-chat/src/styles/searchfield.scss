@@ -1,0 +1,65 @@
+@use "style";
+
+.search-container{
+  width: 100%;
+  height: 100%;
+}
+
+//.search-container.focused {
+//  width: 150%; // Ширина при фокусе
+//}
+
+.search-container.dark-mode {
+  .search-input:focus, .search-input:hover{
+    box-shadow: 0 2px 10px style.$dark-pink;
+  }
+  .search-input{
+    background-color: style.$white;
+  }
+}
+
+.search-input {
+  transition: .8s ease-in-out;
+  justify-content: center;
+  text-align: center;
+  background: rgb(94, 92, 92);
+  width: 100%;
+  padding: 10px 40px 10px 40px; // Отступы для иконок
+  border-radius: 20px;
+}
+
+.search-input:focus,{
+  box-shadow: 0 2px 10px style.$light-pink; // Цвет рамки при фокусе
+  outline: none; // Убираем стандартный outline
+}
+
+.search-icon, .assistant-icon, .app-icon {
+  top: 50%; // Центрирование по вертикали
+  transform: translateY(-50%);
+  margin: 0;
+  justify-content: center;
+  text-align: center;
+  right: 0;
+  position: absolute;
+  flex:1;
+  cursor: pointer;
+  color: style.$black; // Цвет иконок
+}
+
+.assistant-icon {
+  left: 10px; // Положение иконки слева
+}
+
+.search-icon {
+  right: 10px; // Положение иконок справа
+}
+
+.app-icon{
+  right: 40px;
+}
+
+@media (max-width: 410px), (max-height: 700px) {
+  .search-container .app-icon {
+    display: none;
+  }
+}

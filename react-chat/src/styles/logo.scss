@@ -1,0 +1,37 @@
+@use 'style';
+
+.header-link {
+  text-decoration: none;
+  display: flex; // Используйте flexbox для выравнивания элементов
+  align-items: center; // Центрирование по вертикали
+}
+
+.logo-text, .logo-textdarkmode {
+  margin-left: 10px; // Отступ между логотипом и текстом
+  display: flex;
+  flex-direction: column; // Вертикальное расположение текста
+  justify-content: center; // Центрирование текста
+}
+
+.logo-text span {
+  font-weight: 700;
+  font-size: 20px; // Размер шрифта для подписи
+  color: style.$white; // Цвет текста, можно изменить
+}
+
+.logo-textdarkmode span {
+  font-weight: 700;
+  font-size: 20px; // Размер шрифта для подписи
+  color: style.$dark-gray;
+}
+
+.logomode {
+  width: 60px; // Ширина изображения
+  height: auto; // Автоматическая высота, чтобы сохранить пропорции
+}
+
+@media (max-width: 550px) {
+  .logo-text, .logo-textdarkmode {
+    display: none;
+  }
+}
