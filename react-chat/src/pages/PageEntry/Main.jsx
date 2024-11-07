@@ -1,10 +1,15 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { handleFormSubmit } from './formValidation.jsx';
 import styles from '../../styles/entryPage.module.scss';
+import { usePageContext } from '../../ExportModule/PageContext.jsx';
+import {useTheme} from '../../ExportModule/ThemeContext.jsx';
 
-const Main = ({ isDarkMode}) => {
+// { isDarkMode}
+const Main = () => {
     const [message, setMessage] = useState('');
     const [showMessage, setShowMessage] = useState(false);
+    const { navigateTo } = usePageContext();
+    const { isDarkMode } = useTheme();
 
     const registerNicknameRef = useRef();
     const registerPasswordRef = useRef();
@@ -24,7 +29,7 @@ const Main = ({ isDarkMode}) => {
             lastName: registerLastNameRef.current.value,
             patronymic: registerPatronymicRef.current.value,
         };
-        handleFormSubmit('register', registerData, setMessage);
+        handleFormSubmit('register', registerData, setMessage, navigateTo);
         resetForm();
     };
 
@@ -34,7 +39,7 @@ const Main = ({ isDarkMode}) => {
             nickname: loginNicknameRef.current.value,
             password: loginPasswordRef.current.value,
         };
-        handleFormSubmit('login', loginData, setMessage);
+        handleFormSubmit('login', loginData, setMessage, navigateTo);
         resetForm();
     };
 
@@ -89,7 +94,7 @@ const Main = ({ isDarkMode}) => {
                 </form>
             </div>
             {message && (
-                <p className={`${styles.message.includes("успешно") ? "message" : "error"} ${showMessage ? 'show' : ''}`}>
+                <p className={`${message.includes("успешно") ? styles.message : styles.error} ${showMessage ? styles.show : ''}`}>
                     {message}
                 </p>
             )}

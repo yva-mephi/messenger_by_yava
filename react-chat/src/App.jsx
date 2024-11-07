@@ -1,22 +1,21 @@
-// App.jsx
 import React, { useState, useEffect } from 'react';
 import Entry from "./pages/PageEntry/Entry.jsx";
 import Messages from "./pages/PageMessages/Messages.jsx";
-import pageManager from "./ExportModule/classes/PageManager.js"; // Импортируем экземпляр PageManager
+import { PageProvider, usePageContext } from './ExportModule/PageContext.jsx';
+import { ThemeProvider } from './ExportModule/ThemeContext.jsx';
 
-function App() {
-    const [currentPage, setCurrentPage] = useState(pageManager.currentPage);
+const App = () => {
+    return (
+        <ThemeProvider>
+            <PageProvider>
+                <MainComponent />
+            </PageProvider>
+        </ThemeProvider>
+    );
+};
 
-    useEffect(() => {
-        const updatePage = () => {
-            setCurrentPage(pageManager.currentPage);
-        };
-
-        // Подписываемся на изменения страницы
-        const interval = setInterval(updatePage, 100); // Проверяем каждую долю секунды
-
-        return () => clearInterval(interval); // Очистка при размонтировании
-    }, []);
+const MainComponent = () => {
+    const { currentPage } = usePageContext();
 
     const renderPage = () => {
         switch (currentPage) {
@@ -34,6 +33,6 @@ function App() {
             {renderPage()}
         </>
     );
-}
+};
 
 export default App;

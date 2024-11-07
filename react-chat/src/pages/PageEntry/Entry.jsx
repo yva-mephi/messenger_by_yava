@@ -6,20 +6,18 @@ import Background from './Background.jsx';
 import '../../styles/style.scss';
 import '../../styles/darkmode.scss';
 import '../../styles/background.scss';
-// import styles from '../../styles/entryPage.module.scss';
+// import {useTheme} from '../../ExportModule/ThemeContext.jsx'
 
 const Entry = () => {
-    const [isDarkMode, setIsDarkMode] = useState(false);
-
-    const toggleDarkMode = () => {
-        setIsDarkMode(prevMode => !prevMode);
-    };
+    // const { isDarkMode, toggleDarkMode } = useTheme();
 
     return (
         <>
             <Background />
-            <Header isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
-            <Main isDarkMode={isDarkMode} />
+            <Header />
+            {/*isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode}*/}
+            <Main />
+            {/*isDarkMode={isDarkMode}*/}
             <Footer />
         </>
     );

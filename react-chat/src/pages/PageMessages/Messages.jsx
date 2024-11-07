@@ -1,19 +1,20 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
+import { usePageContext } from '../../ExportModule/PageContext.jsx';
 import Menu from "./Menu";
-import DarkmodeButton from "../../ExportModule/DarkmodeButton.jsx";
-import MenuSharpIcon from '@mui/icons-material/MenuSharp';
-import ArrowBackSharpIcon from '@mui/icons-material/ArrowBackSharp';
-import SearchIcon from '@mui/icons-material/Search';
 import styles from '../../styles/messagesPage.module.scss';
+import Header from './Header.jsx';
+import {useTheme} from '../../ExportModule/ThemeContext.jsx'; // Import utility functions
+import { getChatName, getRelativeDate, getCurrentUserId } from "../../ExportModule/utils.js";
+import {chatData} from "../../ExportModule/classes/chat/chats.js";
+import { IconButton } from '@mui/material'; // Import Material UI components
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const Messages = () => {
-    const [isDarkMode, setIsDarkMode] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const menuRef = useRef(null);
-
-    const toggleDarkMode = () => {
-        setIsDarkMode(prevMode => !prevMode);
-    };
+    const { navigateTo } = usePageContext();
+    const { isDarkMode} = useTheme();
+    const [userChats, setUserChats] = useState([]);
 
     const toggleMenu = () => {
         setIsMenuOpen(prevState => !prevState);
@@ -25,42 +26,71 @@ const Messages = () => {
         }
     };
 
-    // Обработчик клика на документе
     const handleDocumentClick = (event) => {
         if (isMenuOpen) {
             handleClickOutside(event);
         }
     };
 
+    useEffect(() => {
+        // Fetch user chats when component mounts
+        const currentUserId = getCurrentUserId(); // Assuming this function is available
+        const chats = chatData.getChatsForUser(currentUserId);
+        alert(currentUserId);
+        setUserChats(chats);
+    }, []);
+
+    const handleChatClick = (chatId) => {
+        navigateTo(`/chat/${chatId}`); // Adjust the navigation as needed
+    };
+
+    const handleDeleteChat = (chatId) => {
+        const confirmDelete = window.confirm('Вы точно хотите удалить данный чат?');
+        if (confirmDelete) {
+            chatData.chats = chatData.chats.filter(c => c.id !== chatId);
+            setUserChats(prevChats => prevChats.filter(chat => chat.id !== chatId));
+            // Optionally save chat data if needed
+        }
+    };
+
     return (
         <div className={`${styles.messagesPage} ${isDarkMode ? styles.darkMode : ''}`}  onClick={handleDocumentClick}>
-            <header className={styles.messagesPage_header}>
-                <button className={styles.menuButton} onClick={toggleMenu}>
-                    <MenuSharpIcon />
-                </button>
-                <button className={styles.backbutton}>
-                    <ArrowBackSharpIcon />
-                </button>
-                <div className={`${styles.searchField} ${isDarkMode ? 'dark-mode' : ''}`}>
-                    <input
-                        type="text"
-                        className={styles.searchInput}
-                        placeholder="Поиск"
-                    />
-                    <button className={styles.findButton}>
-                        <SearchIcon className={styles.searchIcon} />
-                    </button>
-                </div>
-            </header>
-            <main className={styles.messagesMain} >
+            <Header toggleMenu={toggleMenu} navigateTo={navigateTo}/>
+            <main className={styles.messagesMain}>
                 {/* Основной контент сообщений */}
+                <ul className={styles.chatsList}>
+                    {userChats.length > 0 ? userChats.map(chat => {
+                        const lastMessage = chat.messages[chat.messages.length - 1] || {};
+                        const lastMessageText = lastMessage.text || 'Нет сообщений';
+                        const relativeDate = getRelativeDate(lastMessage.date);
+                        const chatName = getChatName(chat);
+
+                        return (
+                            <li key={chat.id} className={styles.chatItem} onClick={() => handleChatClick(chat.id)}>
+                                <div className={styles.chatInfo}>
+                                    <div className={styles.chatName}>{chatName}</div>
+                                    <div className={styles.chatLastMessage}>{lastMessageText}</div>
+                                </div>
+                                <div className={styles.chatTimestamp}>
+                                    <div>{relativeDate}</div>
+                                    <IconButton onClick={(e) => {
+                                        e.stopPropagation();
+                                        handleDeleteChat(chat.id);
+                                    }}>
+                                        <DeleteIcon/>
+                                    </IconButton>
+                                </div>
+                            </li>
+                        );
+                    }) : (
+                        <p>У вас нет чатов</p>
+                    )}
+                </ul>
             </main>
             <Menu
-                ref={menuRef} // Передаём реф в Menu
+                ref={menuRef}
                 isMenuOpen={isMenuOpen}
                 toggleMenu={toggleMenu}
-                isDarkMode={isDarkMode}
-                toggleDarkMode={toggleDarkMode}
             />
         </div>
     );

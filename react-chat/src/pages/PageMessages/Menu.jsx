@@ -3,29 +3,12 @@ import DarkmodeButton from "../../ExportModule/DarkmodeButton.jsx";
 import Logo from "../../ExportModule/Logo.jsx";
 import {userData} from "../../ExportModule/classes/user/users.js"; // Убедитесь, что путь правильный
 import styles from '../../styles/messagesPage.module.scss';
+import {useTheme} from "../../ExportModule/ThemeContext.jsx";
 
-const Menu = React.forwardRef(({ isMenuOpen, toggleMenu, isDarkMode, toggleDarkMode }, ref) => {
-    // const menuRef = useRef(null);
-
-    // Получаем текущего пользователя
+const Menu = React.forwardRef(({ isMenuOpen, toggleMenu}, ref) => {
     const currentUserId = localStorage.getItem("currentUser");
     const currentUser = userData.getUser(currentUserId);
-
-    // Обработчик клика вне меню
-    // const handleClickOutside = (event) => {
-    //     if (menuRef.current && !menuRef.current.contains(event.target)) {
-    //         toggleMenu(); // Закрываем меню
-    //     }
-    // };
-
-    // useEffect(() => {
-    //     // Добавляем обработчик события клика
-    //     document.addEventListener('mousedown', handleClickOutside);
-    //     return () => {
-    //         // Убираем обработчик при размонтировании компонента
-    //         document.removeEventListener('mousedown', handleClickOutside);
-    //     };
-    // }, []);
+    const { isDarkMode, toggleDarkMode } = useTheme();
 
     return (
         <div ref={ref} className={`${styles.menu} ${isMenuOpen ? styles.menuOpen : styles.menuClosed}`}>

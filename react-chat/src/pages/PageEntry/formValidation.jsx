@@ -1,6 +1,5 @@
 import { userData } from '../../ExportModule/classes/user/users.js';
-import pageManager from '../../ExportModule/classes/PageManager.js';
-import {saveToLocalStorage} from '../../ExportModule/utils/storage.js';
+import {saveToLocalStorage, saveUserData} from '../../ExportModule/utils/storage.js';
 
 export const validateRegistration = ({ nickname, password, firstName, lastName, patronymic }) => {
     if (!nickname || !password || !firstName || !lastName || !patronymic) {
@@ -19,7 +18,7 @@ export const validateLogin = ({ nickname, password }) => {
     return { success: true };
 };
 
-export const handleFormSubmit = (action, data, setMessage) => {
+export const handleFormSubmit = (action, data, setMessage, navigateTo) => {
     if (action === 'register') {
         const validation = validateRegistration(data);
         if (!validation.success) {
@@ -34,6 +33,7 @@ export const handleFormSubmit = (action, data, setMessage) => {
         }
         data.avatar='./public/avatar.png';
         userData.addUser(data);
+        saveUserData(userData);
         setMessage("Регистрация успешна!");
     } else if (action === 'login') {
         const validation = validateLogin(data);
@@ -47,7 +47,7 @@ export const handleFormSubmit = (action, data, setMessage) => {
             setMessage("Авторизация успешна!");
             // handleNavigate = 'messages';
             saveToLocalStorage(Number(user.id), 'currentUser')
-            pageManager.navigateTo('messages'); // переключаем страницу
+            navigateTo('messages'); // переключаем страницу
         } else {
             setMessage("Неверный логин или пароль.");
         }
