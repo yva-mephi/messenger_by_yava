@@ -1,4 +1,4 @@
-import {initChatData} from "./chats_init";
+import { initChatData } from "./chats_init";
 
 export class ChatData {
     constructor() {
@@ -7,12 +7,13 @@ export class ChatData {
 
     // Метод для добавления нового чата
     addChat() {
-        const id = (this.chats.length + 1).toString();
+        const id = (this.chats.length + 1).toString(); // Генерируем ID как строку
         const chat = {
             id: id,
             title: '',
             messages: [],
-            users: []
+            users: [],
+            avatar: ''
         };
         this.chats.push(chat);
         return chat;
@@ -40,18 +41,25 @@ export class ChatData {
     }
 
     // Метод для добавления нового пользователя в чат
-    addUser(chatId, userId) {
+    addUser (chatId, userId) {
         const chat = this.getChat(chatId);
         if (chat) {
             chat.users.push(userId);
         }
     }
 
-    getChatsForUser(userId) {
-        return this.chats.filter(chat => chat.users.includes(Number(userId)));
+    addAvatar(chatId, avatarPath) {
+        const chat = this.getChat(chatId);
+        if (chat) {
+            chat.avatar = avatarPath; // Устанавливаем путь к аватарке
+        }
+    }
+
+    getChatsForUser (userId) {
+        return this.chats.filter(chat => chat.users.includes(String(userId))); // Преобразуем userId в строку
     }
 }
 
 const chatData = initChatData();
 
-export {chatData};
+export { chatData };

@@ -56,14 +56,19 @@
   border-right: 1px solid #333;
   display: flex;
   flex-direction: column;
+
 }
 
 .chats {
   list-style: none;
   padding: 10px;
   margin: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 .chat {
+  height: 80px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -81,99 +86,239 @@
   display: flex;
   flex-direction: column;
 }
+.chatDetails {
+  justify-content: flex-start;
+  width: 100%;
+  display: flex; // Используем Flexbox для выравнивания в строку
+  align-items: center; // Выравнивание по вертикали
+  margin-top: 5px; // Отступ между заголовком и деталями
+}
 .chatName {
   font-size: 20px;
-  top: 0;
-  transform: translateY(-50%);
   font-weight: bold;
-  color: style.$white;
+  color: style.$white;  ;
+}
+.chatAvatar {
+  position: relative;
+  left: 5px;
+  width: 50px; // Ширина аватарки
+  height: 50px; // Высота аватарки
+  border-radius: 50%; // Круглая форма
+  //margin-left: 10px; // Отступ между сообщением и аватаром
 }
 .chatLastMessage {
-  font-size: 14px;
+  padding-right: 60px;
+  position: relative;
+  left: 15px;
+  font-size: 16px;
   color: style.$white;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  flex: 1; // Занимает оставшееся пространство
 }
+.messageStatusIcon {
+  position: absolute;
+  right: 45px;
+  top: 40px;
+  margin: 0; // Отступ между кнопкой удаления и иконкой статуса
+  padding: 0;
+  vertical-align: middle; // Выравнивание по вертикали
+  // Вы можете добавить дополнительные стили, если это необходимо
+}
+.messageStatusSent {
+  color: style.$white-pink; // Цвет для отправленных сообщений
+}
+
+.messageStatusReceived {
+  color: style.$dark-gray; // Цвет для полученных сообщений
+}
+
 .chatTimestamp {
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
+  flex-direction: column; // Вертикальное расположение
+  align-items: flex-end; // Выравнивание по правому краю
+  position: relative; // Для использования абсолютного позиционирования дочерних элементов
+  height: 100%; // Занимает всю высоту родительского контейнера
 }
+
 .time {
   font-size: 12px;
   color: style.$white;
   background: style.$gray;
   padding: 5px;
   border-radius: 15px;
+  position: absolute; // Абсолютное позиционирование
+  top: 8px; // Расстояние от верхней границы
+  right: 10px; // Расстояние от правой границы
+  white-space: nowrap; // Запретить перенос текста на новую строку
+  overflow: hidden; // Скрыть переполнение
+  text-overflow: ellipsis; // Добавить многоточие, если текст не помещается
 }
-.deleteButton,.deleteButtonIco {
+
+.deleteButton {
+  position: absolute; // Абсолютное позиционирование
   padding: 0;
-  //width: 50px;
-  //height: 50px;
+  margin: 0;
+  top: 35px ; // Расстояние от нижней границы
+  right: 50px;
+  transform: translateX(-100%);
+  width: 30px;
+  height: 30px;
   color: style.$pink;
+
+  &:hover {
+    border: 1px solid style.$pink;
+  }
 }
-//.chatsList{
-//  align-content: center;
-//  list-style: none;
-//  padding: 10px;
-//  margin: 0;
-//  justify-content: center;
-//  height: 100%;
-//  width: 100%;
-//  background: rgb(0, 0, 0, 0);
-//}
-//
-//.chatItem{
-//  display: flex;
-//  flex-direction: column;
-//  margin: 10px;
-//  background: style.$dark-pink;
-//  border-radius: 15px;
-//  width: 95%;
-//  height: 100px;
-//  //display: flex;
-//  align-items: center;
-//  padding: 10px;
-//  border-bottom: 1px solid #333;
-//  //background-color: $secondary-color;
-//  //border-radius: 15px;
-//  //width: 100%;
-//  box-shadow: 0 2px 10px rgb(0, 0, 0);
-//  //margin-bottom: 2px;
+
+//.time {
 //  position: relative;
-//}
-//.chatTimestamp{
-//  //top: 50%;
-//  //transform: translateY(50%);
-//  position: absolute;
-//  //display: block;
-//  //top: -5%;
-//  right: 5%;
-//
-//}
-//
-//.chatName{
-//  position: absolute;
-//  top:1px;
-//}
-//
-//.time{
-//
-//  padding: 5px;
-//  background: style.$dark-gray;
-//  border-radius: 15px;
+//  top: -  10px;
+//  font-size: 12px;
 //  color: style.$white;
+//  background: style.$gray;
+//  padding: 5px;
+//  border-radius: 15px;
 //}
-//.buttonDel{
-//  width: 30px;
-//  height: 30px;
-//  background: none;
+//.deleteButton,.deleteButtonIco {
 //  position: relative;
-//  right: 10px;
+//  right: 75px;
+//  padding: 0;
+//  width: 50px;
+//  height: 50px;
+//  color: style.$pink;
+//  &:hover {
+//    border: 1px solid style.$pink;
+//  }
 //}
 
+.newChatButton {
+  background: style.$dark-pink; // Цвет кнопки
+  position: absolute;
+  bottom: 10px;
+  left: 95%; // Позиция кнопки
+  transform: translateX(-50%); // Центрирование кнопки
+  color: style.$white; // Цвет текста
+  width: 40px; // Ширина кнопки
+  height: 40px; // Высота кнопки
+  border: none; // Убираем границу
+  border-radius: 20px; // Скругление углов
+  cursor: pointer; // Курсор при наведении
+  display: flex; // Используем flex для центрирования содержимого
+  align-items: center; // Вертикальное центрирование
+  justify-content: center; // Горизонтальное центрирование
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); // Тень для кнопки
+  transition: background 0.3s; // Плавный переход цвета фона
+  &:hover {
+    background: style.$light-pink; // Цвет кнопки при наведении
+  }
+}
+.newChatMenu {
+  position: absolute; // Позиционирование меню
+  bottom: 100px; // Расстояние от кнопки
+  right: 0; // Центрирование по горизонтали
+  transform: translateX(-25%); // Центрирование по горизонтали
+  max-width: 250px; // Максимальная ширина меню
+  background-color: style.$new-gray; // Цвет фона меню
+  padding: 15px; // Увеличенные отступы внутри меню
+  border-radius: 15px; // Скругление углов
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); // Тень для меню
+  z-index: 1000; // Увеличиваем z-index, чтобы меню было поверх других элементов
 
+}
+
+.userSelect {
+  position: relative; // Позиционирование для вложенных элементов
+  margin-bottom: 10px; // Отступ снизу
+
+}
+
+.userSelectInput {
+  width: 100%; // Ширина элемента выбора пользователей
+  padding: 10px; // Отступы внутри элемента
+  font-size: 16px; // Размер шрифта
+  border: none; // Убираем границу
+  border-radius: 15px; // Скругление углов
+  background-color: style.$new-gray; // Цвет фона
+  color: style.$white; // Цвет текста
+  cursor: pointer; // Курсор при наведении
+
+}
+
+.userSelect ul {
+  max-height: 120px; // Установите максимальную высоту, соответствующую трем элементам
+  overflow-y: auto; // Прокрутка при переполнении
+  list-style: none; // Убираем маркеры списка
+  padding: 0; // Убираем отступы
+  margin: 0; // Убираем отступы
+  position: absolute; // Позиционирование списка
+  top: 100%; // Начало списка под элементом выбора
+  left: 0; // Выравнивание по левому краю
+  background-color: style.$new-gray; // Цвет фона списка
+  color: style.$white; // Цвет текста
+  border-radius: 10px; // Скругление углов
+  z-index: 1000; // Увеличиваем z-index, чтобы список был поверх других элементов
+
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: style.$light-gray;
+    border-radius: 10px;
+  }
+}
+
+.userSelect li {
+  border-radius: 15px; // Скругление углов для элементов списка
+  margin-bottom: 5px; // Отступ снизу для элементов списка
+  padding: 10px; // Отступы внутри элемента
+  cursor: pointer; // Курсор при наведении
+  &:hover {
+    background-color: style.$light-pink; // Цвет фона при наведении
+  }
+}
+
+.userSelect li.selected {
+  background-color: style.$dark-pink2; // Цвет фона для выбранного элемента
+  color: #fff; // Цвет текста для выбранного элемента
+}
+
+.newChatMenu input[type="text"] {
+  margin-bottom: 10px; // Отступ снизу
+  width: 100%; // Ширина поля ввода
+  padding: 10px; // Отступы внутри поля
+  font-size: 16px; // Размер шрифта
+  border: none; // Убираем границу
+  border-radius: 15px; // Скругление углов
+  background-color: style.$new-gray; // Цвет фона
+  color: style.$white; // Цвет текста
+  &::placeholder {
+    color: style.$gray; // Цвет текста плейсхолдера
+  }
+  &:disabled {
+    background-color: style.$gray; // Цвет фона для недоступного состояния
+    color: style.$dark-gray; // Цвет текста для недоступного состояния
+    cursor: not-allowed; // Курсор для недоступного состояния
+  }
+}
+
+.buttonNewChat {
+  margin-top: 10px; // Отступ сверху для кнопки создания чата
+  width: 100%; // Ширина кнопки
+  padding: 10px; // Отступы внутри кнопки
+  border: none; // Убираем границу
+  border-radius: 10px; // Скругление углов
+  background-color: style.$dark-pink; // Цвет фона кнопки
+  color: #fff; // Цвет текста
+  cursor: pointer; // Курсор при наведении
+  transition: background 0.3s; // Плавный переход цвета фона
+
+  &:hover {
+    background-color: style.$light-pink; // Цвет кнопки при наведении
+  }
+}
 
 .messagesPage_header{
   display: flex;
@@ -190,7 +335,8 @@
 }
 
 .searchField{
-  display: flex;
+  padding-right: 10px;
+  //display: flex;
   align-items: center;
   position: absolute;
   top: 50%;
@@ -203,7 +349,12 @@
 
 }
 .searchInput{
-  flex: 1;
+  padding-right: 10px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  //flex: 1;
   text-align: center;
   align-items: center;
   justify-content: center;
@@ -304,7 +455,6 @@
   align-items: center;
   margin-bottom: 20px; // Отступ между аватаром и списком
 }
-
 .avatar {
   top: 10px;
   transform: translateX(50%);

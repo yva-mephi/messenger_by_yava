@@ -25,7 +25,7 @@ export const DEFAULT_CHATS = [
                 chatId: 1
             }
         ],
-        users: [1, 2]
+        users: ["1", "2"]
     },
     {
         id: 2,
@@ -49,6 +49,6 @@ export const DEFAULT_CHATS = [
                 chatId: 2
             }
         ],
-        users: [1, 3]
+        users: ["1", "3"]
     }
 ];

@@ -74,3 +74,30 @@ export const areArraysEqual = (arr1, arr2) => {
     if (arr1.length !== arr2.length) return false;
     return arr1.every((value) => arr2.includes(value));
 }
+export const getChatTitle = (chat) => {
+    const currentUserId = getCurrentUserId(); // Получаем текущий ID пользователя
+    const otherUsers = chat.users.filter(userId => userId !== String(currentUserId)); // Преобразуем ID в строку
+
+    if (otherUsers.length === 1) {
+        const otherUser  = userData.getUser (otherUsers[0]); // Получаем единственного собеседника
+        return `${otherUser .lastName} ${otherUser .firstName}`; // ФИО единственного собеседника
+    } else {
+        const otherUserNames = otherUsers.map(userId => {
+            const user = userData.getUser (userId); // Получаем пользователей по ID
+            return `${user.lastName} ${user.firstName}`; // Формируем ФИО
+        });
+        return otherUserNames.join(', '); // ФИО нескольких собеседников
+    }
+};
+
+export const getChatAvatar = (chat) => {
+    const currentUserId = getCurrentUserId(); // Получаем текущий ID пользователя
+    const otherUsers = chat.users.filter(userId => userId !== String(currentUserId)); // Преобразуем ID в строку
+
+    if (otherUsers.length === 1) {
+        const otherUser  = userData.getUser (otherUsers[0]); // Получаем единственного собеседника
+        return otherUser .avatar; // Аватарка единственного собеседника
+    } else {
+        return './public/svg/logotab.svg'; // Статичная аватарка для чатов с несколькими пользователями
+    }
+};

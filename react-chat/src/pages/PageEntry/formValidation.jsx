@@ -46,7 +46,7 @@ export const handleFormSubmit = (action, data, setMessage, navigateTo) => {
         if (user && user.password === data.password) {
             setMessage("Авторизация успешна!");
             // handleNavigate = 'messages';
-            saveToLocalStorage(Number(user.id), 'currentUser')
+            saveToLocalStorage(String(user.id), 'currentUser')
             navigateTo('messages'); // переключаем страницу
         } else {
             setMessage("Неверный логин или пароль.");
