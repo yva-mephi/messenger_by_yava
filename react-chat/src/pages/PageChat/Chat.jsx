@@ -5,12 +5,17 @@ import { generateUniqueId, getCurrentUserId } from '../../ExportModule/utils.js'
 import { useChatContext } from '../../ExportModule/ChatContext';
 import { usePageContext } from '../../ExportModule/PageContext';
 import styles from '../../styles/chatPage.module.scss'; // Импортируем стили
+
 import SendRoundedIcon from '@mui/icons-material/SendRounded';
 import MoreVertRoundedIcon from '@mui/icons-material/MoreVertRounded';
 import CheckSharpIcon from '@mui/icons-material/CheckSharp';
 import DoneAllSharpIcon from '@mui/icons-material/DoneAllSharp';
+import AttachFileIcon from '@mui/icons-material/AttachFile';
+import ArrowBackSharpIcon from "@mui/icons-material/ArrowBackSharp";
+import CircleIcon from '@mui/icons-material/Circle';
 
 const Chat = () => {
+    const {navigateTo} = usePageContext();
     const { currentChatId } = useChatContext();
     const { setCurrentPage } = usePageContext();
     const messagesRef = useRef(null);
@@ -69,15 +74,26 @@ const Chat = () => {
         );
     };
 
+    const prevPage =() =>{
+        navigateTo('messages');
+    }
+
     return (
         <div className={styles.chatContainer}>
             <header className={styles.chatHeader}>
                 <div className={styles.partnerInfo}>
+                    <button className={styles.backbuttonChat} onClick={prevPage}>
+                        <ArrowBackSharpIcon/>
+                    </button>
                     <div className={styles.partnerName}>
-                        {userData.getUser (currentChatId).lastName} {userData.getUser (currentChatId).firstName}
+                        {userData.getUser(currentChatId).lastName} {userData.getUser(currentChatId).firstName}
+                    </div>
+                    <div className={styles.partnerStatus}>
+                        <CircleIcon />
+                         offline
                     </div>
                     <button type="button" className={styles.moreButton}>
-                        <MoreVertRoundedIcon />
+                        <MoreVertRoundedIcon/>
                     </button>
                 </div>
             </header>
@@ -95,6 +111,9 @@ const Chat = () => {
                     />
                     <button type="submit" className={styles.buttonSubmit}>
                         <SendRoundedIcon />
+                    </button>
+                    <button type="submit" className={styles.buttonAttach}>
+                        <AttachFileIcon className={styles.attachIco}/>
                     </button>
                 </form>
             </footer>
