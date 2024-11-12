@@ -8,7 +8,7 @@ export const DEFAULT_CHATS = [
                 sentOrReceived: 'sent',
                 status: 'read',
                 date: '2022-07-25',
-                timestamp: '12:00:00',
+                timestamp: '12:00',
                 senderName: 'Вы',
                 userId: 1,
                 chatId: 1
@@ -19,7 +19,7 @@ export const DEFAULT_CHATS = [
                 sentOrReceived: 'received',
                 status: 'read',
                 date: '2022-07-25',
-                timestamp: '12:01:00',
+                timestamp: '12:01',
                 senderName: 'Иван Иванов',
                 userId: 2,
                 chatId: 1

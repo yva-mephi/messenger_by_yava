@@ -5,7 +5,6 @@ import Footer from './Footer.jsx';
 import Background from './Background.jsx';
 import '../../styles/style.scss';
 import '../../styles/darkmode.scss';
-import '../../styles/background.scss';
 // import {useTheme} from '../../ExportModule/ThemeContext.jsx'
 
 const Entry = () => {

@@ -4,9 +4,10 @@ import Logo from "../../ExportModule/Logo.jsx";
 import {userData} from "../../ExportModule/classes/user/users.js"; // Убедитесь, что путь правильный
 import styles from '../../styles/messagesPage.module.scss';
 import {useTheme} from "../../ExportModule/ThemeContext.jsx";
+import {getCurrentUserId} from "../../ExportModule/utils.js";
 
 const Menu = React.forwardRef(({ isMenuOpen, toggleMenu}, ref) => {
-    const currentUserId = localStorage.getItem("currentUser");
+    const currentUserId = getCurrentUserId();
     const currentUser = userData.getUser(currentUserId);
     const { isDarkMode, toggleDarkMode } = useTheme();
 
