@@ -273,6 +273,51 @@
   align-self: flex-start; // Выравнивание по вертикали
 }
 
+@keyframes appearFromLeft {
+  0% {
+    opacity: 0;
+    transform: translate(-30px, -20px);
+  }
+  50% {
+    opacity: 0.5;
+    transform: translate(-10px, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+}
+.deleteButton {
+  position: absolute;
+  left: -30px; /* Позиция кнопки слева от сообщения */
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: style.$dark-pink; /* Или любой другой цвет */
+  opacity: 0; /* Начальное состояние кнопки */
+  transform: translateY(-20px); /* Начальное смещение для анимации */
+  transition: opacity 0.3s ease; /* Плавный переход для opacity */
+  border-radius: 50%; /* Округлая форма кнопки */
+  width: 30px; /* Размер кнопки */
+  height: 30px; /* Размер кнопки */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: appearFromLeft 0.5s forwards; /* Применение анимации */
+  visibility: hidden; /* Скрываем кнопку по умолчанию */
+  &:hover{
+    border: none;
+    background: none;
+    box-shadow: none;
+    color: style.$pink;
+  }
+}
+
+.show {
+  opacity: 1; /* Полная видимость кнопки */
+  visibility: visible; /* Делаем кнопку видимой */
+}
+
 /* ------------ FOOTER ------------ */
 
 .chatFooter, .messageForm{

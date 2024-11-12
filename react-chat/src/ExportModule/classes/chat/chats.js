@@ -32,6 +32,14 @@ export class ChatData {
         }
     }
 
+    // Метод для удаления сообщения из чата
+    deleteMessage(chatId, messageId) {
+        const chat = this.getChat(chatId);
+        if (chat) {
+            chat.messages = chat.messages.filter(message => message.id !== messageId);
+        }
+    }
+
     // Метод для установки названия чата
     setTitle(chatId, title) {
         const chat = this.getChat(chatId);
@@ -48,6 +56,7 @@ export class ChatData {
         }
     }
 
+    // Метод для добавления аватара
     addAvatar(chatId, avatarPath) {
         const chat = this.getChat(chatId);
         if (chat) {
@@ -55,6 +64,7 @@ export class ChatData {
         }
     }
 
+    // Метод для получения чатов для пользователя
     getChatsForUser (userId) {
         return this.chats.filter(chat => chat.users.includes(String(userId))); // Преобразуем userId в строку
     }
