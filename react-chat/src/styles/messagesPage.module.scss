@@ -5,20 +5,18 @@
   flex-direction: column;
   width: 100%;
   height: 100%;
-  background: transparent;
-
+  //background: linear-gradient(to bottom, #1C1C1C, style.$dark-pink);
+  background-color: style.$dark-gray;
   &.darkMode {
+    //background: linear-gradient(to bottom, style.$light-pink, #fff);
+    background-color: style.$white-pink;
+    transition: .8s ease-in-out;
      .menu, .messagesPage{
       background-image: linear-gradient(style.$light-pink, style.$pink);
       transition: .8s ease-in-out;
     }
     .messagesPage_header {
       background-color: style.$light-pink;
-    }
-    .messagesMain{
-      //background: style.$white;
-      background: linear-gradient(to bottom, style.$light-pink, #fff);
-      transition: .8s ease-in-out;
     }
     .chat{
       //background: rgba(255, 79, 158, 0.73);
@@ -112,31 +110,24 @@
   transition: .8s ease-in-out;
 }
 
-.searchField{
-  padding-right: 10px;
-  //display: flex;
+.searchField {
+  left:auto;
+  //right:5px;
+  padding-left: 100px;
+  //padding: 0;
   align-items: center;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%) translateX(+10px);
-  left: 100px;
+  position: absolute; // Изменено с absolute на relative
   height: 50px;
-  width: 90%;
+  width: 100%; // Задаем ширину в процентах
+  max-width: 400px; // Максимальная ширина, если это необходимо
   background: none;
   border: none;
-
 }
-.searchInput{
+
+.searchInput {
   padding-right: 10px;
-  overflow-y: auto;
-  overflow-x: hidden;
-  display: flex;
-  flex-direction: column;
-  //flex: 1;
   text-align: center;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
+  width: 100%; // Задаем ширину в 100% от родительского элемента
   height: 100%;
   background: rgba(34, 34, 34, 0.75);
   backdrop-filter: blur(10px);
@@ -145,6 +136,7 @@
   transition: .8s ease-in-out;
   border: none;
 }
+
 
 .searchInput::placeholder{
   font-weight: bold;
@@ -191,7 +183,8 @@
   width: 50px;
   position: absolute; // Оставляем абсолютное позиционирование
   top: 50%;
-  left: 95%; // Отступ от правого края
+  left: auto; // Отступ от правого края
+  right: 10px;
   transform: translateY(-50%); // Центрирование по вертикали
   background: none;
   border: none;
@@ -342,7 +335,6 @@
   height: 100%;
   //background-color: style.$dark-gray;
   transition: .8s ease-in-out;
-  background: linear-gradient(to bottom, #1C1C1C, style.$dark-pink);
   border-radius: 0;
 }
 
@@ -359,11 +351,18 @@
 .chats {
   list-style: none;
   //padding: 5px;
-
   flex: 1;
   display: flex;
   flex-direction: column;
   background: transparent;
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: style.$light-gray;
+    border-radius: 10px;
+  }
 }
 .chat {
   margin-bottom: 1px;
@@ -492,12 +491,35 @@
   }
 }
 
+.divNewChat{
+  height: 0;
+  list-style: none;
+  //padding: 5px;
+  //flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: transparent;
+  //left: 92%;
+  right: 0;
+  position: relative;
+  //display: flex;
+  //flex-direction: column;
+  //bottom: 0;
+  //width: 100%;
+  //align-items: end; // Вертикальное центрирование
+  //justify-content: start; // Горизонтальное центрирование
+}
+
 .newChatButton {
+
   background: rgba(255, 79, 158, 0.6); // Цвет кнопки
-  position: absolute;
-  bottom: 10px;
-  left: 95%; // Позиция кнопки
-  transform: translateX(-50%); // Центрирование кнопки
+  position: relative;
+  bottom: 50px;
+  flex-direction: column;
+  left: 92%;
+  //left: auto;
+  right: 0;
+  //transform: translateX(-50%); // Центрирование кнопки
   color: style.$white; // Цвет текста
   width: 40px; // Ширина кнопки
   height: 40px; // Высота кнопки
@@ -515,10 +537,12 @@
 }
 
 .newChatMenu {
+  margin-bottom: 50px;
   position: absolute; // Позиционирование меню
-  bottom: 100px; // Расстояние от кнопки
-  right: 0; // Центрирование по горизонтали
-  transform: translateX(-25%); // Центрирование по горизонтали
+  bottom: 10px; // Расстояние от кнопки
+  //left: 50%;
+  margin-left: 20%;
+  right: 10px; // Центрирование по горизонтали  //transform: translateX(90%); // Центрирование по горизонтали
   max-width: 250px; // Максимальная ширина меню
   background-color: style.$new-gray; // Цвет фона меню
   padding: 15px; // Увеличенные отступы внутри меню
@@ -600,8 +624,10 @@
 }
 
 .buttonNewChat {
-  margin-top: 10px; // Отступ сверху для кнопки создания чата
-  width: 100%; // Ширина кнопки
+  margin-top: 15px;
+  //margin-left: -125px;// Отступ сверху для кнопки создания чата
+  width: 250px; // Ширина кнопки
+position: relative;
   padding: 10px; // Отступы внутри кнопки
   border: none; // Убираем границу
   border-radius: 10px; // Скругление углов

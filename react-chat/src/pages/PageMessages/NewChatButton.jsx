@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import { userData } from '../../ExportModule/classes/user/users.js';
-import { chatData } from '../../ExportModule/classes/chat/chats.js';
-import { saveChatData } from '../../ExportModule/utils/storage.js';
-import { areArraysEqual, getCurrentUserId } from '../../ExportModule/utils.js';
+import React, {useEffect, useState} from 'react';
+import {userData} from '../../ExportModule/classes/user/users.js';
+import {chatData} from '../../ExportModule/classes/chat/chats.js';
+import {saveChatData} from '../../ExportModule/utils/storage.js';
+import {areArraysEqual, getCurrentUserId} from '../../ExportModule/utils.js';
 import styles from '../../styles/messagesPage.module.scss';
 import DrawIcon from '@mui/icons-material/Draw';
 
-const NewChatButton = ({ updateUserChats }) => {
-const [isMenuOpen, setIsMenuOpen] = useState(false);
+const NewChatButton = ({updateUserChats}) => {
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isUserListOpen, setIsUserListOpen] = useState(false);
     const [chatTitle, setChatTitle] = useState('');
     const [selectedUsers, setSelectedUsers] = useState([]);
@@ -61,10 +61,8 @@ const [isMenuOpen, setIsMenuOpen] = useState(false);
     };
 
     return (
-        <div>
-            <button className={styles.newChatButton} onClick={toggleMenu}>
-                <DrawIcon />
-            </button>
+        <div className={styles.divNewChat}>
+
             {isMenuOpen && (
                 <div className={styles.newChatMenu}>
                     <input
@@ -80,25 +78,29 @@ const [isMenuOpen, setIsMenuOpen] = useState(false);
                         </div>
                         {isUserListOpen && (
                             <ul className={styles.show}>
-                        {users.map(user => (
-                            <li
-                                key={user.id}
-                                onClick={() => handleUserSelect(user.id)}
-                                className={selectedUsers.includes(user.id) ? styles.selected : ''}
-                            >
-                                {user.nickname}
-                            </li>
-                        ))}
-                    </ul>
-                    )}
+                                {users.map(user => (
+                                    <li
+                                        key={user.id}
+                                        onClick={() => handleUserSelect(user.id)}
+                                        className={selectedUsers.includes(user.id) ? styles.selected : ''}
+                                    >
+                                        {user.nickname}
+                                    </li>
+                                ))}
+                            </ul>
+                        )}
+                    </div>
+                    <button className={styles.buttonNewChat} onClick={handleCreateChat}
+                            disabled={selectedUsers.length === 0}>
+                        Создать чат
+                    </button>
                 </div>
-                <button className={styles.buttonNewChat} onClick={handleCreateChat} disabled={selectedUsers.length === 0}>
-            Создать чат
-        </button>
-</div>
-)}
-</div>
-);
+            )}
+            <button className={styles.newChatButton} onClick={toggleMenu}>
+                <DrawIcon/>
+            </button>
+        </div>
+    );
 };
 
 export default NewChatButton;

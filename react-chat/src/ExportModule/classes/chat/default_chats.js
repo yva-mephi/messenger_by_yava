@@ -35,7 +35,7 @@ export const DEFAULT_CHATS = [
                 text: 'Привет!',
                 status: 'read',
                 date: '2022-07-25',
-                timestamp: '12:00:00',
+                timestamp: '12:00',
                 userId: 3,
                 chatId: 2
             },
@@ -44,7 +44,7 @@ export const DEFAULT_CHATS = [
                 text: 'Здравствуй!',
                 status: 'sent',
                 date: '2022-07-25',
-                timestamp: '12:01:00',
+                timestamp: '12:01',
                 userId: 1,
                 chatId: 2
             }

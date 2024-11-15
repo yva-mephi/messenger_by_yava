@@ -20,14 +20,19 @@
 ////</div>
 ////
 .chatContainer{
+  background-color: style.$dark-gray;
+  background-image: url("./public/svg/background2.svg");
+  display: flex;
+  flex-direction: column;
   width: 100%;
-  height: 100%;
-  background: transparent ;
+  height: 100vh;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  //background: transparent ;
   &.darkMode{
-    .messages{
       background-color: style.$white-pink;
       background-image: url("./public/svg/background1.svg");
-    }
+
     .chatHeader {
       color: style.$black;
       background: rgba(121, 38, 87, 0.3);
@@ -49,9 +54,7 @@
       color: style.$black;
       background: rgba(166, 60, 99, 0.7);
       backdrop-filter: blur(10px);
-
     }
-
     .received .messageContent {
       color: style.$black;
       background-color: rgba(110, 0, 56, 0.7);
@@ -60,16 +63,20 @@
     .messageText, .timestamp {
       color: style.$black;
     }
-
     .messageStatusIcon {
       color: style.$dark-pink;
     }
-
     .inputContain {
-      background: style.$white;
+      background: rgba(255, 255, 255, 0.6);
       color: style.$black;
       &::placeholder{
         color: style.$black;
+      }
+    }
+    .deleteButton {
+      color: style.$dark-pink;
+      &:hover{
+        color: style.$pink;
       }
     }
   }
@@ -84,7 +91,7 @@
   background: rgba(239, 54, 157, 0.26);
   backdrop-filter: blur(10px);
   display: flex;
-  position: absolute;
+  position: relative;
   z-index: 10;
   top: 0;
   width: 100%;
@@ -172,6 +179,10 @@
 
 /* ------------ MAIN ------------ */
 .chatMain{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
   position: relative;
   width: 100%;
   height: 100vh;
@@ -181,17 +192,19 @@
 }
 
 .messages {
+  flex:1;
+  overflow-y: auto;
+  z-index: 20;
   //margin-top: 80px;
   color: style.$white;
   //margin-top: 80px;
   list-style: none;
-  padding: 85px 25px 65px 20px;
+  //padding: 85px 25px 65px 20px;
+  //padding-top: 80px;
   flex: 1;
   height: calc(100vh);
   overflow-y: auto;
   margin-bottom: 0;
-  background-color: style.$dark-gray;
-  background-image: url("./public/svg/background2.svg");
   z-index: 7;
   position: relative;
   &::-webkit-scrollbar {
@@ -217,6 +230,7 @@
 
 .received {
   justify-content: flex-start; // Выравнивание входящих сообщений влево
+  //margin-left: 20px;
 }
 
 .messageContent {
@@ -240,8 +254,8 @@
 .received .messageContent {
   //background: rgba(200, 200, 200, 0.26); // Цвет фона для входящих сообщений
   //color: style.$black; // Цвет текста для входящих сообщений
-    background-color: #F19CBB;
-    backdrop-filter: blur(5px);
+  background-color: #F19CBB;
+  backdrop-filter: blur(5px);
 }
 
 .messageText {
@@ -250,11 +264,11 @@
 
 .timestamp {
   position: relative;
-  font-size: 0.7em; // Размер шрифта для времени
+  font-size: 0.8em; // Размер шрифта для времени
   color: white; // Цвет для времени
   //margin-top: 10px; // Отступ сверху, чтобы отделить от текста сообщения
   //margin-left: 5px;
-  left: 20px;
+  left: 22px;
   bottom:0;
 }
 
@@ -263,13 +277,13 @@
   bottom: 10px;
   right: 5px;
   margin: 0; // Отступ от текста сообщения
-  color: style.$white-pink;
+  color: style.$pink;
 }
 .avatar {
   width: 40px; // Ширина аватара
   height: 40px; // Высота аватара
   border-radius: 50%; // Скругление для круглого аватара
-  margin-right: 10px; // Отступ справа от аватара
+  margin-left: 10px; // Отступ справа от аватара
   align-self: flex-start; // Выравнивание по вертикали
 }
 
@@ -288,14 +302,17 @@
   }
 }
 .deleteButton {
+  padding: 0;
+  //margin-bottom: 10px;
   position: absolute;
   left: -30px; /* Позиция кнопки слева от сообщения */
+  bottom: 3px ;
   background: transparent;
   border: none;
   cursor: pointer;
-  color: style.$dark-pink; /* Или любой другой цвет */
+  color: style.$white-pink; /* Или любой другой цвет */
   opacity: 0; /* Начальное состояние кнопки */
-  transform: translateY(-20px); /* Начальное смещение для анимации */
+  transform: translateY(-10px); /* Начальное смещение для анимации */
   transition: opacity 0.3s ease; /* Плавный переход для opacity */
   border-radius: 50%; /* Округлая форма кнопки */
   width: 30px; /* Размер кнопки */
@@ -305,6 +322,12 @@
   justify-content: center;
   animation: appearFromLeft 0.5s forwards; /* Применение анимации */
   visibility: hidden; /* Скрываем кнопку по умолчанию */
+  //margin-top: -10px;
+  &.receivedLast {
+    //position: relative; /* Меняем позицию на относительную */
+   bottom: -30px; /* Отступ сверху для размещения ниже сообщения */
+    left: 0; /* Сброс смещения влево */
+  }
   &:hover{
     border: none;
     background: none;
@@ -319,18 +342,27 @@
 }
 
 /* ------------ FOOTER ------------ */
-
+//
 .chatFooter, .messageForm{
+  overflow-x: hidden;
+  overflow-y: hidden;
   //background-image: linear-gradient(style.$dark-pink, style.$super-dark-pik);
   background: transparent;
   color: style.$white;
   display: flex;
-  position: absolute;
+  position: relative;
   bottom: 0;
   width: 100%;
-  height: 80px;
-  z-index: 5;
+
+  max-height: 145px;
+  min-height: 45px;
+  //height: 60px;
+  //max-height: 125px;
+  //height: 125px;
+  //min-height: 40px;
+  z-index: 10;
 }
+
 .messageForm{
   z-index: 9;
   background-color: transparent;
@@ -338,29 +370,48 @@
   position:relative;
 }
 //
-.inputContain{
-  font-style: italic;
-  font-weight: 600;
-  font-size: 16px;
-  width: 100%;
-  height: 50px;
-  max-height: 60px;
-  margin: 5px 5px 5px 5px;
-  padding: 10px 100px 10px 35px;
-  border-radius: 15px;
-  background: style.$dark-gray;
-  color: style.$white;
+.inputContain {
+  max-height: 140px;
+  min-height: 40px;
   box-sizing: border-box;
-  overflow-y: auto;
-  //max-height: 80px;
+  //line-height: 1;
+  overflow-x: hidden;
+  //font-style: italic;
+  font-weight: 600;
   resize: none;
-  font-family: Arial, sans-serif;
   font-size: 16px;
-  white-space: pre-wrap;
-  align-self: center;
-
+  width: 99%;
+  position: absolute; // Устанавливаем позицию
+  bottom: 0; // Отступ от нижней части контейнера
+  left: 0;
+  margin: 5px;
+  padding: 10px 100px 10px 35px; // Увеличиваем правый отступ
+  border-radius: 15px;
+  background: rgba(54, 49, 49, 0.54);
+  backdrop-filter: blur(10px);
+  color: style.$white;
   border: 1px solid style.$pink;
+  transition: height 0.2s ease;
+  scroll-margin-right: 50px;
+  overflow-y: auto; // Позволяет прокручивать содержимое по вертикали
+
+  // Скрываем скроллбар
+  &::-webkit-scrollbar {
+    width: 0; /* Скрываем скроллбар */
+    background: transparent; /* Прозрачный фон для скроллбара */
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: transparent; /* Прозрачный "палец" скроллбара */
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent; // Прозрачный фон для области скролла
+  }
 }
+
+
 //
 .buttonSubmit{
   flex: 1;
@@ -368,43 +419,11 @@
   bottom: 10px;
   //left: inherit;
   left: auto;
-  right: 5px;
-  top: 50%;
-  transform: translateY(-50%);
+  right: -22px;
+  top: auto;
+  //transform: translateY(-50%);
   color: style.$gray;
   width: 50px;
-  height: 30px;
-  border: none;
-  background: none;
-}
-
-.buttonVoice{
-  flex: 1;
-  position: absolute;
-  bottom: 10px;
-  //left: inherit;
-  left: auto;
-  right: 50px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: style.$gray;
-  width: 30px;
-  height: 30px;
-  border: none;
-  background: none;
-}
-
-.buttonEmoji{
-  flex: 1;
-  position: absolute;
-  bottom: 10px;
-  //left: inherit;
-  left: auto;
-  right: 80px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: style.$gray;
-  width: 30px;
   height: 30px;
   border: none;
   background: none;
@@ -415,14 +434,46 @@
 }
 
 .buttonAttach {
+  z-index: 50;
   flex: 1;
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  left: 5px;
+  top: auto;
+  right:auto;
+  bottom: 0;
+  left: 20px;
   color: style.$gray;
   width: 30px;
   height: 50px;
+  border: none;
+  background: none;
+}
+
+.buttonVoice{
+  flex: 1;
+  position: absolute;
+  bottom: 10px;
+  //left: inherit;
+  left: auto;
+  right: 30px;
+  top: auto;
+  //transform: translateY(-50%);
+  color: style.$gray;
+  width: 30px;
+  height: 30px;
+  border: none;
+  background: none;
+}
+
+.buttonEmoji{
+  flex: 1;
+  position: absolute;
+  top: auto;
+  bottom: 10px;
+  left: auto;
+  right: 60px;
+  color: style.$gray;
+  width: 30px;
+  height: 30px;
   border: none;
   background: none;
 }

@@ -48,7 +48,7 @@ const Messages = () => {
         console.log(chatId);
         setCurrentChatId(chatId);
         // Устанавливаем текущий ID чата
-        navigateTo('chat'); // Переключаем текущую страницу на чат
+        // navigateTo('chat'); // Переключаем текущую страницу на чат
     };
     const handleDeleteChat = (chatId) => {
         const confirmDelete = window.confirm('Вы точно хотите удалить данный чат?');

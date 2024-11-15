@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Entry from "./pages/PageEntry/Entry.jsx";
 import Messages from "./pages/PageMessages/Messages.jsx";
-import Chat from "./pages/PageChat/Chat.jsx"; // Импортируем компонент чата
+import Chat from "./pages/PageChat/Chat.jsx";
+import ChatNull from "./pages/PageChat/ChatNull.jsx"; // Импортируем компонент ChatNull
 import { PageProvider, usePageContext } from './ExportModule/PageContext.jsx';
 import { ThemeProvider } from './ExportModule/ThemeContext.jsx';
-import { ChatProvider } from './ExportModule/ChatContext';
+import { ChatProvider, useChatContext } from './ExportModule/ChatContext';
 
 const App = () => {
     return (
@@ -20,18 +21,47 @@ const App = () => {
 
 const MainComponent = () => {
     const { currentPage } = usePageContext();
+    const { currentChatId } = useChatContext();
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 700);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth < 700);
+        };
+
+        window.addEventListener('resize', handleResize);
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
 
     const renderPage = () => {
-        switch (currentPage) {
-            case 'entry':
-                return <Entry />;
-            case 'messages':
-                return <Messages />;
-            case 'chat':
-                return <Chat />; // Добавляем новый случай для чата
-            default:
-                return <Entry />;
+        if (currentPage === 'entry') {
+            return <Entry />;
         }
+
+        if (currentPage === 'messages') {
+            if (isMobile) {
+                return currentChatId ? <Chat /> : <Messages />;
+            } else {
+                return (
+                    <div style={{ display: 'flex', height: '100vh' }}>
+                        <div style={{ flex: 1 }}>
+                            <Messages />
+                        </div>
+                        <div style={{ flex: 1 }}>
+                            {currentChatId ? <Chat /> : <ChatNull />}
+                        </div>
+                    </div>
+                );
+            }
+        }
+
+        if (currentPage === 'chat') {
+            return currentChatId ? <Chat /> : <ChatNull />;
+        }
+
+        return <Entry />;
     };
 
     return (
