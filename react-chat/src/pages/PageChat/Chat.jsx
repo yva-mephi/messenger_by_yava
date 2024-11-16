@@ -1,14 +1,13 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { chatData } from '../../ExportModule/classes/chat/chats.js';
-import { userData } from '../../ExportModule/classes/user/users.js';
-import { generateUniqueId, getCurrentUserId } from '../../ExportModule/utils.js';
+import { generateUniqueId, getCurrentUserId } from '../../ExportModule/utils/utils.js';
 import { useChatContext } from '../../ExportModule/ChatContext';
 import { usePageContext } from '../../ExportModule/PageContext';
-import styles from '../../styles/chatPage.module.scss';
-import Header from './Header';
-import CreateMessage from './CreateMessage'; // Импортируем новый компонент
 import { useTheme } from '../../ExportModule/ThemeContext.jsx';
-import Footer from './Footer'; // Импортируем Footer
+import Header from './Header';
+import Footer from './Footer';
+import CreateMessage from './CreateMessage';
+import styles from '../../styles/chatPage.module.scss';
 
 const Chat = () => {
     const { navigateTo } = usePageContext();
@@ -20,14 +19,6 @@ const Chat = () => {
     const [footerHeight, setFooterHeight] = useState(45);
     const messagesEndRef = useRef(null);
     const { isDarkMode } = useTheme();
-
-    useEffect(() => {
-        loadMessages();
-    }, [currentChatId]);
-
-    useEffect(() => {
-        scrollToBottom();
-    }, [messages]);
 
     const loadMessages = () => {
         const chat = chatData.getChat(currentChatId);
@@ -78,14 +69,19 @@ const Chat = () => {
         loadMessages();
     };
 
-    // const prevPage = () => {
-    //     navigateTo('messages');
-    // };
-
     const handleBackButtonClick = () => {
         setCurrentChatId(null); // Сбрасываем ID текущего чата
         navigateTo('messages'); // Возвращаемся на страницу сообщений
     };
+
+
+    useEffect(() => {
+        loadMessages();
+    }, [currentChatId]);
+
+    useEffect(() => {
+        scrollToBottom();
+    }, [messages]);
 
     return (
         <div className={`${styles.chatContainer} ${isDarkMode ? styles.darkMode : ''}`}>

@@ -1,12 +1,11 @@
 import React from 'react';
-import { userData } from '../../ExportModule/classes/user/users.js';
+import {chatData} from "../../ExportModule/classes/chat/chats.js";
 import ArrowBackSharpIcon from "@mui/icons-material/ArrowBackSharp";
 import CircleIcon from '@mui/icons-material/Circle';
 import MoreVertRoundedIcon from '@mui/icons-material/MoreVertRounded';
 import PhoneRoundedIcon from '@mui/icons-material/PhoneRounded';
+import {getChatTitle} from '../../ExportModule/utils/utils.js';
 import styles from '../../styles/chatPage.module.scss';
-import {getChatTitle} from '../../ExportModule/utils.js';
-import {chatData} from "../../ExportModule/classes/chat/chats.js";
 
 const Header = ({ currentChatId, onBack }) => {
     const chat = chatData.getChat(currentChatId);

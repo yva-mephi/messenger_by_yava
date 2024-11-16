@@ -5,7 +5,6 @@ import SearchField from "../../ExportModule/SearchField.jsx";
 import styles from '../../styles/entryPage.module.scss';
 import {useTheme} from '../../ExportModule/ThemeContext.jsx';
 
-// {isDarkMode, toggleDarkMode}
 const Header = () => {
     const [isFocused, setIsFocused] = useState(false); // Создаем состояние для фокуса
     const { isDarkMode, toggleDarkMode } = useTheme();
@@ -18,7 +17,7 @@ const Header = () => {
                 <DarkmodeButton isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode}/>
             </div>
             <div
-                className={`${styles.searchEntry} ${isFocused ? styles.focused : ''}`}> {/* Применяем класс в зависимости от isFocused */}
+                className={`${styles.searchEntry} ${isFocused ? styles.focused : ''}`}>
                 <SearchField isDarkMode={isDarkMode} isFocused={isFocused} setIsFocused={setIsFocused}/>
             </div>
         </header>

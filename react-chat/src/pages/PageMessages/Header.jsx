@@ -3,10 +3,8 @@ import MenuSharpIcon from '@mui/icons-material/MenuSharp';
 import ArrowBackSharpIcon from '@mui/icons-material/ArrowBackSharp';
 import SearchIcon from '@mui/icons-material/Search';
 import styles from '../../styles/messagesPage.module.scss';
-// import {useTheme} from "../../ExportModule/ThemeContext.jsx";
 
 const Header = ({ toggleMenu, navigateTo }) => {
-    // const { isDarkMode } = useTheme();
     const prevPage =() =>{
         navigateTo('entry');
     }
@@ -19,7 +17,6 @@ const Header = ({ toggleMenu, navigateTo }) => {
             <button className={styles.backbutton} onClick={prevPage}>
                 <ArrowBackSharpIcon />
             </button>
-            {/*${isDarkMode ? 'dark-mode' : ''}*/}
             <div className={`${styles.searchField}`}>
                 <input
                     type="text"

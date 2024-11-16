@@ -1,9 +1,8 @@
 import React, { createContext, useContext, useState } from 'react';
 
-// Создаем контекст
+
 const ThemeContext = createContext();
 
-// Провайдер контекста
 export const ThemeProvider = ({ children }) => {
     const [isDarkMode, setIsDarkMode] = useState(false);
 
@@ -18,7 +17,6 @@ export const ThemeProvider = ({ children }) => {
     );
 };
 
-// Хук для использования контекста
 export const useTheme = () => {
     return useContext(ThemeContext);
 };

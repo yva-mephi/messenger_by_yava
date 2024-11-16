@@ -10,7 +10,6 @@ $left-positions: (0%, 15%, -15%, -34%, -57%, -81%, 37%, 62%, 85%);
     height: 100vh;
     font-weight: 100;
     background: radial-gradient(style.$light-pink, style.$dark-pink);
-    //background: radial-gradient(style.$dark-pink, style.$super-dark-pik);
     overflow-y: hidden;
     animation: fadeIn 1s ease-out;
 
@@ -18,8 +17,8 @@ $left-positions: (0%, 15%, -15%, -34%, -57%, -81%, 37%, 62%, 85%);
         position: absolute;
         width: 0;
         opacity: 0.75;
-        background-color: style.$white; // Цвет для светлой темы
-        box-shadow: #e9f1f1 0 0 20px 2px; // Тень для светлой темы
+        background-color: style.$white;
+        box-shadow: #e9f1f1 0 0 20px 2px;
         top: 100vh;
         bottom: 0;
         left: 0;
@@ -51,7 +50,6 @@ $left-positions: (0%, 15%, -15%, -34%, -57%, -81%, 37%, 62%, 85%);
     height: 100vh;
     font-weight: 100;
     background: radial-gradient(style.$dark-pink, style.$super-dark-pik);
-    //background: radial-gradient(style.$light-pink, style.$dark-pink);
     overflow-y: hidden;
     animation: fadeIn 1s ease-out;
 

@@ -1,24 +1,7 @@
 @use "style";
-//
-////<div className={styles.chatContainer}>
-////<header className={styles.chatHeader}>
-////<h2>Чат</h2>
-////</header>
-////<main className={styles.chatMain}>
-////<ul ref={messagesRef} className={styles.messages}></ul>
-////</main>
-////<footer className={styles.chatFooter}>
-////<form className={styles.messageForm} onSubmit={sendMessage}>
-////<textarea
-//// className={styles.inputContain}
-////ref={messageInputRef}
-////placeholder="Введите сообщение..."
-/////>
-////<button type="submit" className={styles.buttonSubmit}>Отправить</button>
-////</form>
-////</footer>
-////</div>
-////
+
+/* ------------ PAGE ------------ */
+
 .chatContainer{
   background-color: style.$dark-gray;
   background-image: url("./svg/background2.svg");

@@ -1,9 +1,9 @@
 import React from 'react';
-import styles from '../../styles/background.module.scss'; // Импортируем стили как модуль
-import { useTheme } from '../../ExportModule/ThemeContext.jsx'; // Импортируем контекст темы
+import styles from '../../styles/background.module.scss';
+import { useTheme } from '../../ExportModule/ThemeContext.jsx';
 
 const Background = () => {
-    const { isDarkMode } = useTheme(); // Получаем состояние темного режима
+    const { isDarkMode } = useTheme();
 
     return (
         <div className={isDarkMode ? styles.backgroundDark : styles.backgroundLight}>

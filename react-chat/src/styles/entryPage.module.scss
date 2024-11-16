@@ -1,5 +1,34 @@
 @use "style";
 
+.mainEntry{
+  margin: 20px auto;
+  position: absolute;
+  right: 50%;
+  top: 50%;
+  transform: translate(50%, -50%);
+  width: 350px;
+  height: 500px;
+  overflow: hidden;
+  background-image: linear-gradient(style.$pink, style.$dark-pink);
+  border-radius: 10px;
+  box-shadow: 5px 20px 50px #000;
+  &.dark-mode {
+    background-image: linear-gradient(style.$light-pink, style.$pink);
+
+    .login, input {
+      background-color: style.$white;
+    }
+
+    input:hover, button:hover {
+      box-shadow: 0 2px 10px style.$dark-pink;
+    }
+
+    .message, .error {
+      background-color: style.$white;
+    }
+  }
+}
+
 .headerEntry, .footerEntry{
   position: absolute;
   left: 0;
@@ -27,7 +56,7 @@
 .header-link {
   text-decoration: none;
   display: flex;
-  align-items: center; // Центрирование по вертикали
+  align-items: center;
 }
 
 .header-links, .hide-checkbox{
@@ -48,12 +77,12 @@
   left: 50%;
   top: 50%;
   transform: translateX(-50%) translateY(-50%);
-  width: 300px; // Начальная ширина
-  transition: width 0.3s ease; // Анимация изменения ширины
+  width: 300px;
+  transition: width 0.3s ease;
 }
 
 .searchEntry.focused {
-  width: 450px; // Ширина при фокусе
+  width: 450px;
 }
 
 .darkmodeEntry{
@@ -76,42 +105,9 @@
   transform:translateY(-50%)
 }
 
-.mainEntry{
-  margin: 20px auto; // Центрируем main по горизонтали
-  position: absolute;
-  right: 50%;
-  top: 50%;
-  transform: translate(50%, -50%);
-  width: 350px;
-  height: 500px;
-  overflow: hidden;
-  background-image: linear-gradient(style.$pink, style.$dark-pink);
-  border-radius: 10px;
-  box-shadow: 5px 20px 50px #000;
-  & .dark-mode {
-    background-image: linear-gradient(style.$light-pink, style.$pink);
-
-    .login, input {
-      background-color: style.$white;
-    }
-
-    input:hover, button:hover {
-      box-shadow: 0 2px 10px style.$dark-pink;
-    }
-
-    .message, .error {
-      background-color: style.$white;
-    }
-  }
-}
-
 .registrationlabelEntry, .loginlabelEntry{
   margin: 30px 10px 20px 10px;
   font-size: 30px;
-}
-
-.chk{
-  display: none;
 }
 
 .signup{
@@ -131,7 +127,7 @@ label{
   transition: .5s ease-in-out;
 }
 
-.dataEntry {
+.dataEntry{
   width: 80%;
   height: 40px;
   background: style.$gray;
@@ -194,6 +190,10 @@ button:hover{
   transform: scale(.6);
 }
 
+.chk{
+  display: none;
+}
+
 .chk:checked ~ .login{
   transform: translateY(-350px);
 }
@@ -215,23 +215,25 @@ button:hover{
   transform: translateX(-50%);
 }
 
-.mainEntry {
-  &.dark-mode {
-    background-image: linear-gradient(style.$light-pink, style.$pink);
-
-    .login, input {
-      background-color: style.$white;
-    }
-
-    input:hover, button:hover {
-      box-shadow: 0 2px 10px style.$dark-pink;
-    }
-
-    .message, .error {
-      background-color: style.$white;
-    }
-  }
+.message, .error {
+  background-color: style.$gray;
+  color: style.$black;
+  padding: 10px;
+  border-radius: 15px;
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
 }
+
+.message.show, .error.show {
+  opacity: 1;
+}
+
 @media (max-width: 550px) {
   .searchEntry{
     width: 200px;
@@ -288,23 +290,4 @@ button:hover{
       }
     }
   }
-}
-
-.message, .error {
-  background-color: style.$gray;
-  color: style.$black; // Цвет текста
-  padding: 10px; // Отступы
-  border-radius: 15px; // Скругление углов
-  text-align: center; // Центрирование текста
-  position: absolute; // Абсолютное позиционирование
-  top: 50%; // Центрирование по вертикали
-  left: 50%; // Центрирование по горизонтали
-  transform: translate(-50%, -50%); // Центрирование
-  z-index: 10; // Убедитесь, что сообщение выше других элементов
-  opacity: 0; // Начальное значение прозрачности
-  transition: opacity 0.5s ease-in-out; // Плавный переход
-}
-
-.message.show, .error.show {
-  opacity: 1; // Полная непрозрачность при показе
 }

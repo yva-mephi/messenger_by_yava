@@ -26,12 +26,11 @@ export const handleFormSubmit = (action, data, setMessage, navigateTo) => {
             return;
         }
 
-        // Проверяем, существует ли уже пользователь с таким никнеймом
         if (userData.getUserByNickname(data.nickname)) {
             setMessage("Пользователь с таким никнеймом уже существует.");
             return;
         }
-        data.avatar='./public/avatar.png';
+        data.avatar='./avatar.png';
         userData.addUser(data);
         saveUserData(userData);
         setMessage("Регистрация успешна!");
@@ -45,9 +44,8 @@ export const handleFormSubmit = (action, data, setMessage, navigateTo) => {
         const user = userData.getUserByNickname(data.nickname);
         if (user && user.password === data.password) {
             setMessage("Авторизация успешна!");
-            // handleNavigate = 'messages';
             saveToLocalStorage(String(user.id), 'currentUser')
-            navigateTo('messages'); // переключаем страницу
+            navigateTo('messages');
         } else {
             setMessage("Неверный логин или пароль.");
         }

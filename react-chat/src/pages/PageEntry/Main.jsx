@@ -4,7 +4,6 @@ import styles from '../../styles/entryPage.module.scss';
 import { usePageContext } from '../../ExportModule/PageContext.jsx';
 import {useTheme} from '../../ExportModule/ThemeContext.jsx';
 
-// { isDarkMode}
 const Main = () => {
     const [message, setMessage] = useState('');
     const [showMessage, setShowMessage] = useState(false);

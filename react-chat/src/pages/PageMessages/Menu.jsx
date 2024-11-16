@@ -1,10 +1,10 @@
 import React, {useEffect, useRef} from 'react';
 import DarkmodeButton from "../../ExportModule/DarkmodeButton.jsx";
 import Logo from "../../ExportModule/Logo.jsx";
-import {userData} from "../../ExportModule/classes/user/users.js"; // Убедитесь, что путь правильный
+import {userData} from "../../ExportModule/classes/user/users.js";
 import styles from '../../styles/messagesPage.module.scss';
 import {useTheme} from "../../ExportModule/ThemeContext.jsx";
-import {getCurrentUserId} from "../../ExportModule/utils.js";
+import {getCurrentUserId} from "../../ExportModule/utils/utils.js";
 
 const Menu = React.forwardRef(({ isMenuOpen, toggleMenu}, ref) => {
     const currentUserId = getCurrentUserId();

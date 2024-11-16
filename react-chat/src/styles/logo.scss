@@ -2,32 +2,32 @@
 
 .header-link {
   text-decoration: none;
-  display: flex; // Используйте flexbox для выравнивания элементов
-  align-items: center; // Центрирование по вертикали
+  display: flex;
+  align-items: center;
 }
 
 .logo-text, .logo-textdarkmode {
-  margin-left: 10px; // Отступ между логотипом и текстом
+  margin-left: 10px;
   display: flex;
-  flex-direction: column; // Вертикальное расположение текста
-  justify-content: center; // Центрирование текста
+  flex-direction: column;
+  justify-content: center;
 }
 
 .logo-text span {
   font-weight: 700;
-  font-size: 20px; // Размер шрифта для подписи
-  color: style.$white; // Цвет текста, можно изменить
+  font-size: 20px;
+  color: style.$white;
 }
 
 .logo-textdarkmode span {
   font-weight: 700;
-  font-size: 20px; // Размер шрифта для подписи
+  font-size: 20px;
   color: style.$dark-gray;
 }
 
 .logomode {
-  width: 60px; // Ширина изображения
-  height: auto; // Автоматическая высота, чтобы сохранить пропорции
+  width: 60px;
+  height: auto;
 }
 
 @media (max-width: 550px) {

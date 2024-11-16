@@ -1,9 +1,9 @@
 @use "style";
 
 .chatNullPage {
-  display: flex; // Используем flexbox для центрирования
-  align-items: center; // Центрируем по вертикали
-  justify-content: center; // Центрируем по горизонтали
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   height: 100%;
   background-color: style.$gray;
@@ -13,7 +13,7 @@
     .string {
       color: black;
       background: rgba(124, 122, 122, 0.33);
-      border: 1px solid rgba(70, 70, 70, 0.2); // Легкая граница для выделения
+      border: 1px solid rgba(70, 70, 70, 0.2);
     }
   }
 }
@@ -21,20 +21,16 @@
 .string {
   color: white;
   position: relative;
-  //top: 50%;
-  //left: 50%;
-  //transform: translateX(50%);
-  padding: 10px; // Увеличиваем отступы для лучшего восприятия
-  border-radius: 25px; // Увеличиваем радиус скругления
-  background: rgba(255, 255, 255, 0.04); // Увеличиваем прозрачность фона
-  backdrop-filter: blur(15px); // Увеличиваем эффект размытия
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); // Увеличиваем тень для глубины
-  border: 1px solid rgba(255, 255, 255, 0.2); // Легкая граница для выделения
-  transition: background 0.3s ease, transform 0.3s ease; // Плавный переход для фона и трансформации
+  padding: 10px;
+  border-radius: 25px;
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(15px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: background 0.3s ease, transform 0.3s ease;
 
-  // Эффект при наведении
   &:hover {
-    background: rgba(255, 255, 255, 0); // Увеличиваем прозрачность фона при наведении
-    transform: scale(1.05); // Немного увеличиваем размер при наведении
+    background: rgba(255, 255, 255, 0);
+    transform: scale(1.05);
   }
 }

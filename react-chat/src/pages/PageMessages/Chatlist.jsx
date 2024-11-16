@@ -1,7 +1,6 @@
 import { userData } from '../../ExportModule/classes/user/users.js';
-import {getChatName, getRelativeDate, getCurrentUserId} from "../../ExportModule/utils.js";
+import {getChatName, getRelativeDate, getCurrentUserId, getChatTitle, getChatAvatar} from "../../ExportModule/utils/utils.js";
 import React from 'react';
-import { getChatTitle, getChatAvatar } from '../../ExportModule/utils.js'; // Импортируем функции
 import styles from '../../styles/messagesPage.module.scss';
 import { IconButton } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -18,7 +17,6 @@ const ChatList = ({ userChats, handleChatClick, handleDeleteChat }) => {
                 const chatAvatar = getChatAvatar(chat);
                 const chatTitle = getChatTitle(chat);
 
-                // Определяем иконку статуса сообщения
                 const isSentByCurrentUser  = lastMessage.sentOrReceived === 'sent';
                 const isMessageRead = lastMessage.status === 'read';
                 const MessageIcon = isMessageRead ? DoneAllSharpIcon : CheckSharpIcon;

@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {userData} from '../../ExportModule/classes/user/users.js';
 import {chatData} from '../../ExportModule/classes/chat/chats.js';
 import {saveChatData} from '../../ExportModule/utils/storage.js';
-import {areArraysEqual, getCurrentUserId} from '../../ExportModule/utils.js';
+import {areArraysEqual, getCurrentUserId} from '../../ExportModule/utils/utils.js';
 import styles from '../../styles/messagesPage.module.scss';
 import DrawIcon from '@mui/icons-material/Draw';
 
@@ -15,8 +15,8 @@ const NewChatButton = ({updateUserChats}) => {
 
     useEffect(() => {
         const allUsers = userData.getAllUsers();
-        const currentUserId = String(getCurrentUserId()); // Преобразуем ID текущего пользователя в строку
-        const filteredUsers = allUsers.filter(user => String(user.id) !== currentUserId); // Преобразуем ID пользователя в строку для сравнения
+        const currentUserId = String(getCurrentUserId());
+        const filteredUsers = allUsers.filter(user => String(user.id) !== currentUserId);
         setUsers(filteredUsers);
     }, []);
 
@@ -39,7 +39,7 @@ const NewChatButton = ({updateUserChats}) => {
     };
 
     const handleCreateChat = () => {
-        const currentUserId = String(getCurrentUserId()); // Преобразуем ID текущего пользователя в строку
+        const currentUserId = String(getCurrentUserId());
         const newChatUsers = [...selectedUsers, currentUserId];
         const existingChat = chatData.chats.find(chat => {
             const chatUsers = chat.users;
@@ -49,15 +49,11 @@ const NewChatButton = ({updateUserChats}) => {
             console.log('Чат с такими пользователями уже существует');
             return;
         }
-        // const newChatId = chatData.chats.length + 1; // Это может быть изменено, если у вас есть логика для генерации уникальных идентификаторов
         const newChat = chatData.addChat();
         newChat.title = chatTitle;
         newChat.users = newChatUsers;
         saveChatData(chatData);
-        // Логика навигации к новому чату
-
-        // Обновляем список чатов
-        updateUserChats(); // Вызываем функцию обновления
+        updateUserChats();
     };
 
     return (
