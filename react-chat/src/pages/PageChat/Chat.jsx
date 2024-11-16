@@ -6,7 +6,7 @@ import { usePageContext } from '../../ExportModule/PageContext';
 import { useTheme } from '../../ExportModule/ThemeContext.jsx';
 import Header from './Header';
 import Footer from './Footer';
-import Main from './Main'; // Импортируем Main
+import Main from './Main';
 import { saveChatData } from "../../ExportModule/utils/storage.js";
 import { scrollToBottom } from './ScrollToBottom.jsx';
 import styles from '../../styles/chatPage.module.scss';
@@ -75,7 +75,7 @@ const Chat = () => {
                 hoveredMessageId={hoveredMessageId}
                 setHoveredMessageId={setHoveredMessageId}
                 deleteMessage={deleteMessage}
-                messagesEndRef={messagesEndRef} // Передаем ссылку
+                messagesEndRef={messagesEndRef}
             />
             <Footer sendMessage={sendMessage} />
         </div>

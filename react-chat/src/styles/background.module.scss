@@ -28,7 +28,6 @@ $left-positions: (0%, 15%, -15%, -34%, -57%, -81%, 37%, 62%, 85%);
 
     &:has(#hide-checkbox:checked) {
         background: radial-gradient(style.$light-pink, style.$dark-pink);
-        //background: radial-gradient(style.$dark-pink, style.$super-dark-pik);
         .light {
             background-color: style.$white;
             box-shadow: #e9f1f1 0 0 20px 2px;

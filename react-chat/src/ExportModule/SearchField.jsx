@@ -15,8 +15,8 @@ const SearchField = ({ isDarkMode, isFocused, setIsFocused }) => {
                 className="search-input"
                 placeholder="Поиск..."
                 value={searchInput}
-                onFocus={() => setIsFocused(true)} // Устанавливаем фокус при фокусе на input
-                onBlur={() => setIsFocused(false)} // Убираем фокус при потере фокуса
+                onFocus={() => setIsFocused(true)}
+                onBlur={() => setIsFocused(false)}
                 onChange={(e) => setSearchInput(e.target.value)}
             />
             <SearchIcon className="search-icon" />

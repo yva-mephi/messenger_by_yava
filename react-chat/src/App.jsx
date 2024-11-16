@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Entry from "./pages/PageEntry/Entry.jsx";
 import Messages from "./pages/PageMessages/Messages.jsx";
 import Chat from "./pages/PageChat/Chat.jsx";
-import ChatNull from "./pages/PageChat/ChatNull.jsx"; // Импортируем компонент ChatNull
+import ChatNull from "./pages/PageChat/ChatNull.jsx";
 import { PageProvider, usePageContext } from './ExportModule/PageContext.jsx';
 import { ThemeProvider } from './ExportModule/ThemeContext.jsx';
 import { ChatProvider, useChatContext } from './ExportModule/ChatContext';

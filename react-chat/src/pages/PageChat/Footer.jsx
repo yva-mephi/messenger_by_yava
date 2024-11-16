@@ -28,12 +28,12 @@ const Footer = ({ sendMessage }) => {
 
     const handleKeyDown = (event) => {
         if (event.key === 'Enter' && !event.shiftKey) {
-            event.preventDefault(); // Предотвращаем создание новой строки
+            event.preventDefault();
             sendMessage(messageText);
-            setMessageText(''); // Очищаем поле ввода
+            setMessageText('');
             setFooterHeight(45);
             if (textareaRef.current) {
-                textareaRef.current.style.height = '40px'; // Сбрасываем высоту текстового поля
+                textareaRef.current.style.height = '40px';
             }
         }
     };
