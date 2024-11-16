@@ -1,16 +1,17 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import { userData } from '../../ExportModule/classes/user/users.js';
 import CheckSharpIcon from '@mui/icons-material/CheckSharp';
 import DoneAllSharpIcon from '@mui/icons-material/DoneAllSharp';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import { scrollToBottom } from './ScrollToBottom.jsx';
 import styles from '../../styles/chatPage.module.scss';
 
-const Main = ({ messages, userId, hoveredMessageId, setHoveredMessageId, deleteMessage, scrollToBottom }) => {
-    const messagesEndRef = useRef(null);
+const Main = ({ messages, userId, hoveredMessageId, setHoveredMessageId, deleteMessage, messagesEndRef }) => {
 
     useEffect(() => {
-        scrollToBottom();
+        scrollToBottom(messagesEndRef);
     }, [messages]);
+
 
     const createMessageElement = (message, index) => {
         const isSentByCurrentUser  = userId === message.userId;

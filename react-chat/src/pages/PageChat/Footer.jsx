@@ -1,11 +1,13 @@
-import React, {useRef} from 'react';
+import React, { useRef, useState } from 'react';
 import SendRoundedIcon from '@mui/icons-material/SendRounded';
 import AttachFileIcon from '@mui/icons-material/AttachFile';
 import MicNoneRoundedIcon from '@mui/icons-material/MicNoneRounded';
 import SentimentSatisfiedRoundedIcon from '@mui/icons-material/SentimentSatisfiedRounded';
 import styles from '../../styles/chatPage.module.scss';
 
-const Footer = ({ messageText, setMessageText, sendMessage, footerHeight, handleKeyDown, setFooterHeight }) => {
+const Footer = ({ sendMessage }) => {
+    const [messageText, setMessageText] = useState('');
+    const [footerHeight, setFooterHeight] = useState(45);
     const textareaRef = useRef(null);
 
     const handleChange = (event) => {
@@ -24,9 +26,21 @@ const Footer = ({ messageText, setMessageText, sendMessage, footerHeight, handle
         }
     };
 
+    const handleKeyDown = (event) => {
+        if (event.key === 'Enter' && !event.shiftKey) {
+            event.preventDefault(); // Предотвращаем создание новой строки
+            sendMessage(messageText);
+            setMessageText(''); // Очищаем поле ввода
+            setFooterHeight(45);
+            if (textareaRef.current) {
+                textareaRef.current.style.height = '40px'; // Сбрасываем высоту текстового поля
+            }
+        }
+    };
+
     return (
         <footer className={styles.chatFooter} style={{ height: footerHeight }}>
-            <form className={styles.messageForm} onSubmit={sendMessage}>
+            <form className={styles.messageForm} onSubmit={(e) => { e.preventDefault(); sendMessage(messageText); }}>
                 <button type="button" className={styles.buttonAttach}>
                     <AttachFileIcon className={styles.attachIco} />
                 </button>

@@ -6,7 +6,9 @@ import { usePageContext } from '../../ExportModule/PageContext';
 import { useTheme } from '../../ExportModule/ThemeContext.jsx';
 import Header from './Header';
 import Footer from './Footer';
-import CreateMessage from './CreateMessage';
+import Main from './Main'; // Импортируем Main
+import { saveChatData } from "../../ExportModule/utils/storage.js";
+import { scrollToBottom } from './ScrollToBottom.jsx';
 import styles from '../../styles/chatPage.module.scss';
 
 const Chat = () => {
@@ -15,8 +17,6 @@ const Chat = () => {
     const userId = getCurrentUserId();
     const [messages, setMessages] = useState([]);
     const [hoveredMessageId, setHoveredMessageId] = useState(null);
-    const [messageText, setMessageText] = useState('');
-    const [footerHeight, setFooterHeight] = useState(45);
     const messagesEndRef = useRef(null);
     const { isDarkMode } = useTheme();
 
@@ -33,14 +33,7 @@ const Chat = () => {
         }
     };
 
-    const scrollToBottom = () => {
-        if (messagesEndRef.current) {
-            messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
-        }
-    };
-
-    const sendMessage = (event) => {
-        event.preventDefault();
+    const sendMessage = (messageText) => {
         if (!messageText.trim()) return;
 
         const messageData = {
@@ -54,58 +47,37 @@ const Chat = () => {
 
         chatData.addMessage(currentChatId, messageData);
         loadMessages();
-        setMessageText('');
-        scrollToBottom();
-    };
-
-    const handleKeyDown = (event) => {
-        if (event.key === 'Enter' && !event.shiftKey) {
-            sendMessage(event);
-        }
+        saveChatData(chatData);
+        scrollToBottom(messagesEndRef);
     };
 
     const deleteMessage = (messageId) => {
         chatData.deleteMessage(currentChatId, messageId);
+        saveChatData(chatData);
         loadMessages();
     };
 
     const handleBackButtonClick = () => {
-        setCurrentChatId(null); // Сбрасываем ID текущего чата
-        navigateTo('messages'); // Возвращаемся на страницу сообщений
+        setCurrentChatId(null);
+        navigateTo('messages');
     };
-
 
     useEffect(() => {
         loadMessages();
     }, [currentChatId]);
 
-    useEffect(() => {
-        scrollToBottom();
-    }, [messages]);
-
     return (
         <div className={`${styles.chatContainer} ${isDarkMode ? styles.darkMode : ''}`}>
             <Header currentChatId={currentChatId} onBack={handleBackButtonClick} />
-            <main className={styles.chatMain}>
-                <ul className={styles.messages} >
-                    <CreateMessage
-                        messages={messages}
-                        userId={userId}
-                        hoveredMessageId={hoveredMessageId}
-                        setHoveredMessageId={setHoveredMessageId}
-                        deleteMessage={deleteMessage}
-                    />
-                    <div ref={messagesEndRef} />
-                </ul>
-            </main>
-            <Footer
-                messageText={messageText}
-                setMessageText={setMessageText}
-                sendMessage={sendMessage}
-                footerHeight={footerHeight}
-                handleKeyDown={handleKeyDown}
-                setFooterHeight={setFooterHeight}
+            <Main
+                messages={messages}
+                userId={userId}
+                hoveredMessageId={hoveredMessageId}
+                setHoveredMessageId={setHoveredMessageId}
+                deleteMessage={deleteMessage}
+                messagesEndRef={messagesEndRef} // Передаем ссылку
             />
+            <Footer sendMessage={sendMessage} />
         </div>
     );
 };

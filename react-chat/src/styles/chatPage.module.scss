@@ -50,7 +50,9 @@
       color: style.$dark-pink;
     }
     .inputContain {
-      background: rgba(255, 255, 255, 0.6);
+      background: rgba(255, 255, 255, 0.5);
+
+      backdrop-filter: blur(5px);
       color: style.$black;
       &::placeholder{
         color: style.$black;
